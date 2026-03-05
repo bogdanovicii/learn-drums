@@ -110,7 +110,16 @@
   .drum-visual {
     position: relative;
     width: 220px; height: 220px;
-    margin: 0 auto 30px;
+    margin: 0 auto 10px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .drum-visual:hover .drum-circle {
+    box-shadow:
+      inset 0 -20px 40px rgba(0,0,0,0.5),
+      0 0 0 6px #FFD600,
+      0 0 60px rgba(255,214,0,0.7),
+      0 20px 60px rgba(0,0,0,0.7);
   }
   .drum-circle {
     width: 220px; height: 220px;
@@ -125,6 +134,15 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 90px;
     animation: drumPulse 0.5s ease-in-out infinite alternate;
+    transition: box-shadow 0.3s;
+  }
+  .drum-circle.hit {
+    animation: drumHit 0.15s ease-out;
+  }
+  @keyframes drumHit {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(0.9); }
+    100% { transform: scale(1); }
   }
   @keyframes drumPulse {
     from { transform: scaleY(1); box-shadow: 0 0 0 6px #FF2D2D, 0 0 40px rgba(255,45,45,0.5), 0 20px 60px rgba(0,0,0,0.7); }
@@ -141,6 +159,64 @@
   @keyframes stickHit {
     from { transform: rotate(-30deg) translateY(-10px); }
     to   { transform: rotate(10deg) translateY(5px); }
+  }
+
+  /* ===== NOW PLAYING ===== */
+  .now-playing {
+    text-align: center;
+    margin-bottom: 25px;
+    min-height: 50px;
+  }
+  .now-playing .hint-text {
+    font-family: 'Bangers', cursive;
+    font-size: 1.1rem;
+    color: var(--orange);
+    letter-spacing: 2px;
+    animation: blink-hint 1.5s ease-in-out infinite;
+  }
+  @keyframes blink-hint {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+  }
+  .now-playing .song-info {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .now-playing .song-info.active {
+    display: flex;
+  }
+  .now-playing .eq-bars {
+    display: flex;
+    gap: 3px;
+    align-items: flex-end;
+    height: 20px;
+  }
+  .now-playing .eq-bars span {
+    width: 4px;
+    background: var(--yellow);
+    border-radius: 2px;
+    animation: eq 0.8s ease-in-out infinite alternate;
+  }
+  .now-playing .eq-bars span:nth-child(1) { height: 8px; animation-delay: 0s; }
+  .now-playing .eq-bars span:nth-child(2) { height: 16px; animation-delay: 0.15s; }
+  .now-playing .eq-bars span:nth-child(3) { height: 10px; animation-delay: 0.3s; }
+  .now-playing .eq-bars span:nth-child(4) { height: 18px; animation-delay: 0.1s; }
+  .now-playing .eq-bars span:nth-child(5) { height: 6px; animation-delay: 0.25s; }
+  @keyframes eq {
+    from { height: 4px; }
+    to   { height: 20px; }
+  }
+  .now-playing .song-title {
+    font-family: 'Bangers', cursive;
+    font-size: 1.1rem;
+    color: var(--yellow);
+    letter-spacing: 1px;
+  }
+  .now-playing .song-artist {
+    font-size: 0.85rem;
+    color: var(--orange);
   }
 
   /* ===== GIFT MESSAGE ===== */
@@ -383,55 +459,6 @@
     font-size: 0.85rem;
   }
 
-  /* ===== MUSIC BUTTON ===== */
-  .music-btn {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 999;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 3px solid var(--yellow);
-    background: linear-gradient(135deg, var(--red), var(--orange));
-    color: white;
-    font-size: 1.6rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 20px rgba(255,45,45,0.5);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .music-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 28px rgba(255,45,45,0.7);
-  }
-  .music-btn.playing {
-    animation: pulse-glow 1.5s ease-in-out infinite;
-  }
-  @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 4px 20px rgba(255,45,45,0.5); }
-    50%      { box-shadow: 0 4px 30px rgba(255,214,0,0.8), 0 0 60px rgba(255,107,0,0.4); }
-  }
-  .music-btn .label {
-    position: absolute;
-    bottom: 68px;
-    right: 0;
-    background: var(--dark);
-    border: 2px solid var(--orange);
-    color: var(--cream);
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 10px;
-    white-space: nowrap;
-    pointer-events: none;
-    opacity: 1;
-    transition: opacity 0.5s;
-  }
-  .music-btn .label.hidden { opacity: 0; }
   #yt-player { position: fixed; top: -9999px; left: -9999px; width: 1px; height: 1px; }
 
   /* ===== RESPONSIVE ===== */
@@ -439,7 +466,6 @@
     .voucher-box, .gift-card { padding: 25px 20px; }
     .drum-circle { width: 160px; height: 160px; font-size: 65px; }
     .drum-visual { width: 160px; height: 160px; }
-    .music-btn { width: 50px; height: 50px; font-size: 1.3rem; bottom: 16px; right: 16px; }
   }
 </style>
 </head>
@@ -455,10 +481,22 @@
   <h1>IT'S <span>DRUM</span><br>O'CLOCK!</h1>
   <p class="subtitle">Someone loves you enough to let you make noise</p>
 
-  <div class="drum-visual">
+  <div class="drum-visual" id="drum-btn" onclick="drumClicked()">
     <span class="drumstick stick1">🥢</span>
-    <div class="drum-circle">🥁</div>
+    <div class="drum-circle" id="drum-circle">🥁</div>
     <span class="drumstick stick2">🥢</span>
+  </div>
+
+  <div class="now-playing" id="now-playing">
+    <span class="hint-text" id="play-hint">👆 HIT THE DRUM TO PLAY MUSIC!</span>
+    <div class="song-info" id="song-info">
+      <div class="eq-bars"><span></span><span></span><span></span><span></span><span></span></div>
+      <div>
+        <div class="song-title" id="song-title"></div>
+        <div class="song-artist" id="song-artist"></div>
+      </div>
+      <div class="eq-bars"><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
   </div>
 </section>
 
@@ -535,12 +573,6 @@
 
 <!-- Hidden YouTube Player -->
 <div id="yt-player"></div>
-
-<!-- Music Toggle Button -->
-<button class="music-btn" id="music-btn" onclick="toggleMusic()">
-  🔇
-  <span class="label" id="music-label">🎸 Click for Metallica!</span>
-</button>
 
 <script>
   const VALID_CODE = 'haicaofacsipeasta';
@@ -659,14 +691,26 @@
     });
   }
 
-  // ===== YOUTUBE MUSIC =====
-  let ytPlayer = null;
-  let isPlaying = false;
-  const musicBtn = document.getElementById('music-btn');
-  const musicLabel = document.getElementById('music-label');
+  // ===== YOUTUBE MUSIC PLAYLIST =====
+  const playlist = [
+    { id: 'tAGnKpE4NCI', title: 'Nothing Else Matters', artist: 'Metallica' },
+    { id: 'xnKhsTXoKCI', title: 'Thunderstruck', artist: 'AC/DC' },
+    { id: 'fJ9rUzIMcZQ', title: 'Bohemian Rhapsody', artist: 'Queen' },
+    { id: 'r9LCwI5iErE', title: 'Smells Like Teen Spirit', artist: 'Nirvana' },
+    { id: '1w7OgIMMRc4', title: 'Sweet Child O\' Mine', artist: 'Guns N\' Roses' },
+    { id: 'bx1Bh8ZvH84', title: 'Kickstart My Heart', artist: 'Motley Crue' },
+    { id: 'pAgnJDJN4VA', title: 'Back In Black', artist: 'AC/DC' },
+    { id: 'dQw4w9WgXcQ', title: 'Never Gonna Give You Up', artist: 'Rick Astley 😏' },
+  ];
 
-  // Hide label after 4 seconds
-  setTimeout(() => musicLabel.classList.add('hidden'), 4000);
+  let ytPlayer = null;
+  let currentSongIndex = -1;
+  let isPlaying = false;
+  const drumCircle = document.getElementById('drum-circle');
+  const playHint = document.getElementById('play-hint');
+  const songInfo = document.getElementById('song-info');
+  const songTitle = document.getElementById('song-title');
+  const songArtist = document.getElementById('song-artist');
 
   // Load YouTube IFrame API
   const ytScript = document.createElement('script');
@@ -675,28 +719,47 @@
 
   function onYouTubeIframeAPIReady() {
     ytPlayer = new YT.Player('yt-player', {
-      videoId: 'tAGnKpE4NCI',
-      playerVars: { autoplay: 0, loop: 1, playlist: 'tAGnKpE4NCI' },
+      videoId: playlist[0].id,
+      playerVars: { autoplay: 0 },
       events: {
-        onReady: function() { ytPlayer.setVolume(40); }
+        onReady: function() { ytPlayer.setVolume(50); },
+        onStateChange: function(e) {
+          if (e.data === YT.PlayerState.ENDED) playNext();
+        }
       }
     });
   }
 
-  function toggleMusic() {
+  function drumClicked() {
     if (!ytPlayer || typeof ytPlayer.getPlayerState !== 'function') return;
+
+    // Drum hit animation
+    drumCircle.classList.remove('hit');
+    void drumCircle.offsetWidth;
+    drumCircle.classList.add('hit');
+
     if (isPlaying) {
-      ytPlayer.pauseVideo();
-      musicBtn.textContent = '🔇';
-      musicBtn.classList.remove('playing');
-      isPlaying = false;
+      // Skip to next song
+      playNext();
     } else {
-      ytPlayer.playVideo();
-      musicBtn.textContent = '🔊';
-      musicBtn.classList.add('playing');
-      isPlaying = true;
+      // Start playing from next song in list
+      playNext();
     }
-    musicLabel.classList.add('hidden');
+  }
+
+  function playNext() {
+    currentSongIndex = (currentSongIndex + 1) % playlist.length;
+    const song = playlist[currentSongIndex];
+
+    ytPlayer.loadVideoById(song.id);
+    ytPlayer.playVideo();
+    isPlaying = true;
+
+    // Update display
+    playHint.style.display = 'none';
+    songInfo.classList.add('active');
+    songTitle.textContent = song.title;
+    songArtist.textContent = song.artist;
   }
 </script>
 </body>
