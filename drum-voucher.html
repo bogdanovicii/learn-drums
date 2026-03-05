@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🥁 DRUM VOUCHER 🥁</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  :root {
+    --red: #FF2D2D;
+    --yellow: #FFD600;
+    --dark: #1A0A00;
+    --orange: #FF6B00;
+    --cream: #FFF8E7;
+    --green: #00C853;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='28' font-size='28'%3E🥁%3C/text%3E%3C/svg%3E") 16 16, auto;
+  }
+
+  /* ===== CONFETTI ===== */
+  .confetti-container {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .confetti-piece {
+    position: absolute;
+    width: 10px; height: 16px;
+    border-radius: 2px;
+    animation: confettiFall linear infinite;
+    opacity: 0.85;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0.3; }
+  }
+
+  /* ===== HEADER ===== */
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 50px 20px 30px;
+    background: radial-gradient(ellipse at top, #2a0a00 0%, var(--dark) 70%);
+  }
+
+  .birthday-banner {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--dark);
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    letter-spacing: 4px;
+    padding: 10px 40px;
+    border-radius: 50px;
+    border: 4px solid var(--orange);
+    box-shadow: 0 0 0 8px var(--dark), 0 0 0 12px var(--yellow), 8px 8px 0 12px rgba(0,0,0,0.5);
+    animation: wiggle 1.5s ease-in-out infinite;
+    margin-bottom: 20px;
+  }
+  @keyframes wiggle {
+    0%,100% { transform: rotate(-2deg) scale(1); }
+    50%      { transform: rotate(2deg) scale(1.04); }
+  }
+
+  .drum-emoji-row {
+    font-size: clamp(2rem, 6vw, 4rem);
+    letter-spacing: 10px;
+    animation: bounce 0.8s ease-in-out infinite alternate;
+    display: block;
+    margin: 10px 0;
+  }
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-12px); }
+  }
+
+  h1 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(3rem, 10vw, 8rem);
+    color: var(--cream);
+    letter-spacing: 6px;
+    line-height: 1;
+    text-shadow:
+      6px 6px 0 var(--red),
+      12px 12px 0 rgba(255,45,45,0.3);
+    margin: 10px 0 5px;
+  }
+  h1 span { color: var(--yellow); }
+
+  .subtitle {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    color: var(--orange);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+  }
+
+  /* ===== DRUM IMAGE SECTION ===== */
+  .drum-visual {
+    position: relative;
+    width: 220px; height: 220px;
+    margin: 0 auto 30px;
+  }
+  .drum-circle {
+    width: 220px; height: 220px;
+    background: radial-gradient(circle at 35% 35%, #c0392b, #7b241c);
+    border-radius: 50%;
+    border: 12px solid #5d1a10;
+    box-shadow:
+      inset 0 -20px 40px rgba(0,0,0,0.5),
+      0 0 0 6px #FF2D2D,
+      0 0 40px rgba(255,45,45,0.5),
+      0 20px 60px rgba(0,0,0,0.7);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 90px;
+    animation: drumPulse 0.5s ease-in-out infinite alternate;
+  }
+  @keyframes drumPulse {
+    from { transform: scaleY(1); box-shadow: 0 0 0 6px #FF2D2D, 0 0 40px rgba(255,45,45,0.5), 0 20px 60px rgba(0,0,0,0.7); }
+    to   { transform: scaleY(0.97); box-shadow: 0 0 0 6px #FFD600, 0 0 60px rgba(255,214,0,0.6), 0 20px 60px rgba(0,0,0,0.7); }
+  }
+  .drumstick {
+    position: absolute;
+    font-size: 48px;
+    animation: stickHit 0.4s ease-in-out infinite alternate;
+    transform-origin: bottom center;
+  }
+  .stick1 { top: -10px; right: 10px; animation-delay: 0s; }
+  .stick2 { top: -5px; left: 10px; animation-delay: 0.2s; transform: scaleX(-1); }
+  @keyframes stickHit {
+    from { transform: rotate(-30deg) translateY(-10px); }
+    to   { transform: rotate(10deg) translateY(5px); }
+  }
+
+  /* ===== GIFT MESSAGE ===== */
+  .gift-card {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto 40px;
+    background: linear-gradient(135deg, #2d0a00, #1a0500);
+    border: 3px solid var(--orange);
+    border-radius: 24px;
+    padding: 30px 40px;
+    box-shadow: 0 0 0 6px rgba(255,107,0,0.15), 0 30px 60px rgba(0,0,0,0.5);
+    text-align: center;
+  }
+  .gift-card::before {
+    content: '🎁';
+    font-size: 2.5rem;
+    position: absolute;
+    top: -25px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--dark);
+    padding: 0 10px;
+  }
+  .gift-card h2 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--yellow);
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+  }
+  .gift-card p {
+    color: #ffcba0;
+    font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+    line-height: 1.8;
+  }
+  .gift-card p strong { color: var(--yellow); }
+  .funny-quote {
+    margin-top: 15px;
+    font-style: italic;
+    color: #ff9966;
+    font-size: 0.95rem;
+  }
+
+  /* ===== VOUCHER FORM ===== */
+  .voucher-section {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+  }
+
+  .voucher-box {
+    background: var(--cream);
+    border-radius: 24px;
+    padding: 40px;
+    border: 4px dashed var(--orange);
+    box-shadow: 8px 8px 0 var(--orange), 0 30px 60px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+  }
+  .voucher-box::after {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(255,214,0,0.15), transparent 70%);
+    pointer-events: none;
+  }
+
+  .voucher-box h3 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--dark);
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .voucher-box .hint {
+    text-align: center;
+    color: #7a5a30;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    font-style: italic;
+  }
+
+  .input-group {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .input-group label {
+    display: block;
+    font-weight: 900;
+    color: var(--dark);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .input-group input, .input-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 3px solid #d4a050;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    background: white;
+    color: var(--dark);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .input-group input:focus, .input-group textarea:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 4px rgba(255,107,0,0.2);
+  }
+  .input-group textarea { resize: vertical; min-height: 90px; }
+
+  #voucher-code-input {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    text-transform: lowercase;
+  }
+
+  .code-status {
+    margin-top: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    min-height: 20px;
+    transition: all 0.3s;
+  }
+  .code-valid   { color: var(--green); }
+  .code-invalid { color: var(--red); }
+
+  .submit-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--red), var(--orange));
+    color: white;
+    font-family: 'Bangers', cursive;
+    font-size: 1.8rem;
+    letter-spacing: 4px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 6px 0 #8b1a00, 0 10px 20px rgba(255,45,45,0.3);
+    margin-top: 10px;
+  }
+  .submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 0 #8b1a00, 0 14px 28px rgba(255,45,45,0.4);
+  }
+  .submit-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 3px 0 #8b1a00;
+  }
+  .submit-btn:disabled {
+    background: #aaa;
+    box-shadow: 0 6px 0 #666;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* ===== SUCCESS STATE ===== */
+  #success-screen {
+    display: none;
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+    text-align: center;
+  }
+  .success-card {
+    background: linear-gradient(135deg, #003300, #001a00);
+    border: 4px solid var(--green);
+    border-radius: 24px;
+    padding: 50px 40px;
+    box-shadow: 0 0 0 8px rgba(0,200,83,0.1), 8px 8px 0 var(--green);
+  }
+  .success-card .big-emoji {
+    font-size: 5rem;
+    display: block;
+    animation: partyPop 0.5s ease-out;
+    margin-bottom: 20px;
+  }
+  @keyframes partyPop {
+    0%   { transform: scale(0) rotate(-180deg); }
+    80%  { transform: scale(1.3) rotate(10deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+  .success-card h2 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2rem, 6vw, 4rem);
+    color: var(--green);
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+  }
+  .success-card p {
+    color: #aaffcc;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  /* ===== FUNNY FACTS ===== */
+  .facts-strip {
+    position: relative;
+    z-index: 1;
+    background: var(--yellow);
+    padding: 20px 0;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .facts-inner {
+    display: flex;
+    gap: 60px;
+    white-space: nowrap;
+    animation: scrollStrip 20s linear infinite;
+  }
+  @keyframes scrollStrip {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .facts-inner span {
+    font-family: 'Bangers', cursive;
+    font-size: 1.3rem;
+    color: var(--dark);
+    letter-spacing: 2px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 30px;
+    color: #5a3020;
+    font-size: 0.85rem;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 480px) {
+    .voucher-box, .gift-card { padding: 25px 20px; }
+    .drum-circle { width: 160px; height: 160px; font-size: 65px; }
+    .drum-visual { width: 160px; height: 160px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CONFETTI -->
+<div class="confetti-container" id="confetti"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="birthday-banner">🎂 HAPPY BIRTHDAY! 🎂</div>
+  <span class="drum-emoji-row">🥁 🥁 🥁</span>
+  <h1>IT'S <span>DRUM</span><br>O'CLOCK!</h1>
+  <p class="subtitle">Someone loves you enough to let you make noise</p>
+
+  <div class="drum-visual">
+    <span class="drumstick stick1">🥢</span>
+    <div class="drum-circle">🥁</div>
+    <span class="drumstick stick2">🥢</span>
+  </div>
+</section>
+
+<!-- SCROLLING STRIP -->
+<div class="facts-strip">
+  <div class="facts-inner" id="strip"></div>
+</div>
+
+<!-- GIFT MESSAGE -->
+<div class="gift-card">
+  <h2>🎁 You've Been Gifted a Drumming Adventure!</h2>
+  <p>
+    Somebody out there decided that what the world needs right now is
+    <strong>YOU banging on drums</strong>. Bold move. Possibly reckless.
+    Absolutely legendary. 🤘
+  </p>
+  <p style="margin-top:12px;">
+    This voucher grants you <strong>drum lessons</strong> — because playing drums is the
+    closest thing to being a rockstar without actually having to write songs
+    or wear leather pants. <em>(Leather pants optional.)</em>
+  </p>
+  <p class="funny-quote">
+    "The rhythm is gonna get ya. It's basically gravity now." 🥁
+  </p>
+</div>
+
+<!-- VOUCHER FORM -->
+<section class="voucher-section" id="voucher-section">
+  <div class="voucher-box">
+    <h3>🎟️ Redeem Your Voucher</h3>
+    <p class="hint">Enter your secret code below and we'll get you drumming faster than you can say "paradiddle"</p>
+
+    <div class="input-group">
+      <label>🔑 Your Voucher Code</label>
+      <input type="text" id="voucher-code-input" placeholder="enter code here..." autocomplete="off" spellcheck="false">
+      <div class="code-status" id="code-status"></div>
+    </div>
+
+    <div class="input-group">
+      <label>👤 Your Name</label>
+      <input type="text" id="name-input" placeholder="Future Rock Legend...">
+    </div>
+
+    <div class="input-group">
+      <label>📅 When do you want to start? (Preferred days / times)</label>
+      <textarea id="schedule-input" placeholder="e.g. Weekends, mornings... or just 'ASAP, I need to hit things'"></textarea>
+    </div>
+
+    <button class="submit-btn" id="redeem-btn" onclick="redeemVoucher()" disabled>
+      🥁 LET'S DO THIS! 🥁
+    </button>
+  </div>
+</section>
+
+<!-- SUCCESS -->
+<section id="success-screen">
+  <div class="success-card">
+    <span class="big-emoji">🎉</span>
+    <h2>VOUCHER REDEEMED!</h2>
+    <p>
+      Your message has been sent to your drum instructor.<br>
+      Get ready to <strong>ROCK</strong>. They'll be in touch soon to schedule your first lesson.<br><br>
+      In the meantime, air drum everywhere. In the elevator. In meetings. At dinner.<br>
+      You're basically a drummer now. 🥁🤘
+    </p>
+    <p style="margin-top:20px; color:#66ffaa;">
+      🎂 And once again — <strong>HAPPY BIRTHDAY!</strong> 🎂<br>
+      This is the start of something incredibly loud.
+    </p>
+  </div>
+</section>
+
+<footer>Made with 🥁 and too much caffeine &nbsp;|&nbsp; Let the beat drop!</footer>
+
+<script>
+  const VALID_CODE = 'haicaofacsipeasta';
+
+  // EmailJS init
+  emailjs.init('LBrV6OUJtR0UAnCp_');
+
+  // Confetti
+  const colors = ['#FF2D2D','#FFD600','#FF6B00','#00C853','#2196F3','#E91E63','#fff'];
+  const container = document.getElementById('confetti');
+  for (let i = 0; i < 60; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.cssText = `
+      left: ${Math.random()*100}%;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+      width: ${6+Math.random()*10}px;
+      height: ${10+Math.random()*14}px;
+      animation-duration: ${3+Math.random()*5}s;
+      animation-delay: ${Math.random()*5}s;
+      border-radius: ${Math.random()>0.5?'50%':'3px'};
+    `;
+    container.appendChild(el);
+  }
+
+  // Scrolling strip
+  const facts = [
+    '🥁 DRUMS ARE THE HEARTBEAT OF MUSIC',
+    '🎂 HAPPY BIRTHDAY ROCKSTAR',
+    '🤘 RINGO STARR CHANGED THE WORLD',
+    '🥢 PARADIDDLE IS A REAL WORD',
+    '🎵 RHYTHM IS LIFE',
+    '🥁 NEIGHBORS WILL LOVE YOU',
+    '🎸 DRUMMERS HAVE MORE FUN',
+    '🎂 BEST BIRTHDAY GIFT EVER',
+    '🥁 BANG BANG BANG',
+    '🎉 YOUR INNER ROCKSTAR IS WAITING',
+  ];
+  const strip = document.getElementById('strip');
+  // Duplicate for seamless loop
+  [...facts, ...facts].forEach(f => {
+    const s = document.createElement('span');
+    s.textContent = f;
+    strip.appendChild(s);
+  });
+
+  // Code validation
+  const codeInput = document.getElementById('voucher-code-input');
+  const codeStatus = document.getElementById('code-status');
+  const redeemBtn = document.getElementById('redeem-btn');
+
+  codeInput.addEventListener('input', () => {
+    const val = codeInput.value.trim().toLowerCase();
+    if (!val) {
+      codeStatus.textContent = '';
+      codeStatus.className = 'code-status';
+      redeemBtn.disabled = true;
+    } else if (val === VALID_CODE) {
+      codeStatus.textContent = '✅ Valid code! You\'re officially a future drummer!';
+      codeStatus.className = 'code-status code-valid';
+      redeemBtn.disabled = false;
+    } else {
+      codeStatus.textContent = '❌ Hmm, that\'s not right. Try again, drummer!';
+      codeStatus.className = 'code-status code-invalid';
+      redeemBtn.disabled = true;
+    }
+  });
+
+  function redeemVoucher() {
+    const code = codeInput.value.trim().toLowerCase();
+    const name = document.getElementById('name-input').value.trim();
+    const schedule = document.getElementById('schedule-input').value.trim();
+
+    if (code !== VALID_CODE) {
+      alert('Invalid voucher code! 🥁');
+      return;
+    }
+    if (!name) {
+      alert('Please enter your name, future rockstar! 🎸');
+      return;
+    }
+
+    redeemBtn.disabled = true;
+    redeemBtn.textContent = '🥁 SENDING... 🥁';
+
+    emailjs.send('service_em61sx6', 'template_8w1lhaj', {
+      from_name: name,
+      voucher_code: code,
+      schedule: schedule || 'Flexible – whenever you can fit me in!'
+    }).then(() => {
+      // Show success
+      document.getElementById('voucher-section').style.display = 'none';
+      const success = document.getElementById('success-screen');
+      success.style.display = 'block';
+      success.scrollIntoView({ behavior: 'smooth' });
+      // Extra confetti burst
+      for (let i = 0; i < 40; i++) {
+        const el = document.createElement('div');
+        el.className = 'confetti-piece';
+        el.style.cssText = `
+          left: ${Math.random()*100}%;
+          background: ${colors[Math.floor(Math.random()*colors.length)]};
+          width: ${8+Math.random()*12}px;
+          height: ${12+Math.random()*16}px;
+          animation-duration: ${2+Math.random()*3}s;
+          animation-delay: 0s;
+          border-radius: ${Math.random()>0.5?'50%':'3px'};
+        `;
+        container.appendChild(el);
+      }
+    }).catch((err) => {
+      console.error('EmailJS error:', err);
+      alert('Oops! Something went wrong sending the email. Please try again. 🥁');
+      redeemBtn.disabled = false;
+      redeemBtn.textContent = '🥁 LET\'S DO THIS! 🥁';
+    });
+  }
+</script>
+</body>
+</html>
