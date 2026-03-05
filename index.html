@@ -459,6 +459,133 @@
     font-size: 0.85rem;
   }
 
+  /* ===== LOCATION PICKER ===== */
+  .location-group { margin-bottom: 20px; }
+  .location-group > label {
+    display: block;
+    font-weight: 900;
+    color: var(--dark);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .location-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .loc-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 3px solid #d4a050;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  }
+  .loc-card:hover {
+    border-color: var(--orange);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255,107,0,0.15);
+  }
+  .loc-card.selected {
+    border-color: var(--orange);
+    background: #fff5e6;
+    box-shadow: 0 0 0 3px rgba(255,107,0,0.2);
+  }
+  .loc-card input[type="radio"] { display: none; }
+  .loc-radio {
+    width: 22px; height: 22px;
+    border: 3px solid #d4a050;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s;
+  }
+  .loc-card.selected .loc-radio {
+    border-color: var(--orange);
+  }
+  .loc-radio::after {
+    content: '';
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--orange);
+    transform: scale(0);
+    transition: transform 0.2s;
+  }
+  .loc-card.selected .loc-radio::after { transform: scale(1); }
+  .loc-details { flex: 1; }
+  .loc-name {
+    font-weight: 900;
+    color: var(--dark);
+    font-size: 0.95rem;
+  }
+  .loc-addr {
+    font-size: 0.8rem;
+    color: #7a5a30;
+    margin-top: 2px;
+  }
+  .loc-emoji { font-size: 1.5rem; }
+
+  .map-preview {
+    margin-top: 12px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 3px solid #d4a050;
+    display: none;
+    animation: fadeSlide 0.4s ease;
+  }
+  .map-preview.visible { display: block; }
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .map-preview iframe {
+    width: 100%;
+    height: 220px;
+    border: none;
+    display: block;
+  }
+  .map-address-bar {
+    background: #fff5e6;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--dark);
+    font-weight: 700;
+  }
+
+  .other-input-wrap {
+    display: none;
+    margin-top: 10px;
+    animation: fadeSlide 0.4s ease;
+  }
+  .other-input-wrap.visible { display: block; }
+  .other-input-wrap textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 3px solid #d4a050;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    background: white;
+    color: var(--dark);
+    resize: vertical;
+    min-height: 70px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .other-input-wrap textarea:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 4px rgba(255,107,0,0.2);
+  }
+
   #yt-player { position: fixed; top: -9999px; left: -9999px; width: 1px; height: 1px; }
 
   /* ===== RESPONSIVE ===== */
@@ -545,6 +672,75 @@
       <textarea id="schedule-input" placeholder="e.g. Weekends, mornings... or just 'ASAP, I need to hit things'"></textarea>
     </div>
 
+    <div class="location-group">
+      <label>📍 Where do you want to unleash the beast?</label>
+      <div class="location-options" id="location-options">
+
+        <label class="loc-card" data-loc="aiv" onclick="selectLocation(this)">
+          <input type="radio" name="location" value="AIV Drum School București">
+          <div class="loc-radio"></div>
+          <div class="loc-details">
+            <div class="loc-name">AIV Drum School</div>
+            <div class="loc-addr">București — where legends are forged 🔥</div>
+          </div>
+          <span class="loc-emoji">🥁</span>
+        </label>
+
+        <label class="loc-card" data-loc="kmusic" onclick="selectLocation(this)">
+          <input type="radio" name="location" value="K Music Academy – Rândunelelor 13, Sector 3, București">
+          <div class="loc-radio"></div>
+          <div class="loc-details">
+            <div class="loc-name">K Music Academy</div>
+            <div class="loc-addr">Rândunelelor 13, Sector 3, București</div>
+          </div>
+          <span class="loc-emoji">🎸</span>
+        </label>
+
+        <label class="loc-card" data-loc="musiccrew" onclick="selectLocation(this)">
+          <input type="radio" name="location" value="MUSIC CREW – Str. Nicolae C. Dona 16, București">
+          <div class="loc-radio"></div>
+          <div class="loc-details">
+            <div class="loc-name">MUSIC CREW</div>
+            <div class="loc-addr">Str. Nicolae C. Dona 16, București</div>
+          </div>
+          <span class="loc-emoji">🤘</span>
+        </label>
+
+        <label class="loc-card" data-loc="armonia" onclick="selectLocation(this)">
+          <input type="radio" name="location" value="Scoala de Muzica Armonia Obor – Str. Prof. Ion Maiorescu 37, Sector 2, București">
+          <div class="loc-radio"></div>
+          <div class="loc-details">
+            <div class="loc-name">Scoala de Muzica Armonia Obor</div>
+            <div class="loc-addr">Str. Prof. Ion Maiorescu 37, Sector 2, București</div>
+          </div>
+          <span class="loc-emoji">🎵</span>
+        </label>
+
+        <label class="loc-card" data-loc="other" onclick="selectLocation(this)">
+          <input type="radio" name="location" value="other">
+          <div class="loc-radio"></div>
+          <div class="loc-details">
+            <div class="loc-name">Somewhere Else...</div>
+            <div class="loc-addr">You rebel. You march to your own beat. Literally.</div>
+          </div>
+          <span class="loc-emoji">🌍</span>
+        </label>
+
+      </div>
+
+      <div class="other-input-wrap" id="other-input-wrap">
+        <textarea id="other-location-input" placeholder="Tell us where you'd like to drum! A garage? A rooftop? Your ex's front lawn? We don't judge. 🥁"></textarea>
+      </div>
+
+      <div class="map-preview" id="map-preview">
+        <iframe id="map-iframe" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-address-bar">
+          <span>📍</span>
+          <span id="map-address-text"></span>
+        </div>
+      </div>
+    </div>
+
     <button class="submit-btn" id="redeem-btn" onclick="redeemVoucher()" disabled>
       🥁 LET'S DO THIS! 🥁
     </button>
@@ -619,6 +815,40 @@
     strip.appendChild(s);
   });
 
+  // ===== LOCATION PICKER =====
+  const locationMaps = {
+    aiv:       { query: 'AIV+Drum+School+București', address: 'AIV Drum School, București' },
+    kmusic:    { query: 'Rândunelelor+13,+Sector+3,+București', address: 'Rândunelelor 13, Sector 3, București' },
+    musiccrew: { query: 'Strada+Nicolae+C.+Dona+16,+București', address: 'Str. Nicolae C. Dona 16, București' },
+    armonia:   { query: 'Str.+Profesor+Ion+Maiorescu+37,+Sector+2,+București', address: 'Str. Prof. Ion Maiorescu 37, Sector 2, București' },
+  };
+  let selectedLocation = '';
+
+  function selectLocation(card) {
+    document.querySelectorAll('.loc-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+
+    const loc = card.dataset.loc;
+    const mapPreview = document.getElementById('map-preview');
+    const mapIframe = document.getElementById('map-iframe');
+    const mapAddress = document.getElementById('map-address-text');
+    const otherWrap = document.getElementById('other-input-wrap');
+
+    if (loc === 'other') {
+      mapPreview.classList.remove('visible');
+      otherWrap.classList.add('visible');
+      selectedLocation = '';
+      document.getElementById('other-location-input').focus();
+    } else {
+      otherWrap.classList.remove('visible');
+      const info = locationMaps[loc];
+      mapIframe.src = 'https://www.google.com/maps?q=' + info.query + '&output=embed';
+      mapAddress.textContent = info.address;
+      mapPreview.classList.add('visible');
+      selectedLocation = card.querySelector('input').value;
+    }
+  }
+
   // Code validation
   const codeInput = document.getElementById('voucher-code-input');
   const codeStatus = document.getElementById('code-status');
@@ -658,10 +888,23 @@
     redeemBtn.disabled = true;
     redeemBtn.textContent = '🥁 SENDING... 🥁';
 
+    // Get selected location
+    const otherLoc = document.getElementById('other-location-input').value.trim();
+    const locRadio = document.querySelector('input[name="location"]:checked');
+    let location = 'No preference';
+    if (locRadio) {
+      if (locRadio.value === 'other') {
+        location = otherLoc || 'Surprise me!';
+      } else {
+        location = locRadio.value;
+      }
+    }
+
     emailjs.send('service_em61sx6', 'template_8w1lhaj', {
       from_name: name,
       voucher_code: code,
-      schedule: schedule || 'Flexible – whenever you can fit me in!'
+      schedule: schedule || 'Flexible – whenever you can fit me in!',
+      location: location
     }).then(() => {
       // Show success
       document.getElementById('voucher-section').style.display = 'none';
