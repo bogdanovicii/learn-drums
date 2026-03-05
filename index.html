@@ -383,11 +383,63 @@
     font-size: 0.85rem;
   }
 
+  /* ===== MUSIC BUTTON ===== */
+  .music-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--yellow);
+    background: linear-gradient(135deg, var(--red), var(--orange));
+    color: white;
+    font-size: 1.6rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(255,45,45,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .music-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 28px rgba(255,45,45,0.7);
+  }
+  .music-btn.playing {
+    animation: pulse-glow 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 4px 20px rgba(255,45,45,0.5); }
+    50%      { box-shadow: 0 4px 30px rgba(255,214,0,0.8), 0 0 60px rgba(255,107,0,0.4); }
+  }
+  .music-btn .label {
+    position: absolute;
+    bottom: 68px;
+    right: 0;
+    background: var(--dark);
+    border: 2px solid var(--orange);
+    color: var(--cream);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 10px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+  .music-btn .label.hidden { opacity: 0; }
+  #yt-player { position: fixed; top: -9999px; left: -9999px; width: 1px; height: 1px; }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 480px) {
     .voucher-box, .gift-card { padding: 25px 20px; }
     .drum-circle { width: 160px; height: 160px; font-size: 65px; }
     .drum-visual { width: 160px; height: 160px; }
+    .music-btn { width: 50px; height: 50px; font-size: 1.3rem; bottom: 16px; right: 16px; }
   }
 </style>
 </head>
@@ -480,6 +532,15 @@
 </section>
 
 <footer>Made with 🥁 and too much caffeine &nbsp;|&nbsp; Let the beat drop!</footer>
+
+<!-- Hidden YouTube Player -->
+<div id="yt-player"></div>
+
+<!-- Music Toggle Button -->
+<button class="music-btn" id="music-btn" onclick="toggleMusic()">
+  🔇
+  <span class="label" id="music-label">🎸 Click for Metallica!</span>
+</button>
 
 <script>
   const VALID_CODE = 'haicaofacsipeasta';
@@ -596,6 +657,46 @@
       redeemBtn.disabled = false;
       redeemBtn.textContent = '🥁 LET\'S DO THIS! 🥁';
     });
+  }
+
+  // ===== YOUTUBE MUSIC =====
+  let ytPlayer = null;
+  let isPlaying = false;
+  const musicBtn = document.getElementById('music-btn');
+  const musicLabel = document.getElementById('music-label');
+
+  // Hide label after 4 seconds
+  setTimeout(() => musicLabel.classList.add('hidden'), 4000);
+
+  // Load YouTube IFrame API
+  const ytScript = document.createElement('script');
+  ytScript.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(ytScript);
+
+  function onYouTubeIframeAPIReady() {
+    ytPlayer = new YT.Player('yt-player', {
+      videoId: 'tAGnKpE4NCI',
+      playerVars: { autoplay: 0, loop: 1, playlist: 'tAGnKpE4NCI' },
+      events: {
+        onReady: function() { ytPlayer.setVolume(40); }
+      }
+    });
+  }
+
+  function toggleMusic() {
+    if (!ytPlayer || typeof ytPlayer.getPlayerState !== 'function') return;
+    if (isPlaying) {
+      ytPlayer.pauseVideo();
+      musicBtn.textContent = '🔇';
+      musicBtn.classList.remove('playing');
+      isPlaying = false;
+    } else {
+      ytPlayer.playVideo();
+      musicBtn.textContent = '🔊';
+      musicBtn.classList.add('playing');
+      isPlaying = true;
+    }
+    musicLabel.classList.add('hidden');
   }
 </script>
 </body>
