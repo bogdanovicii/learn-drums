@@ -788,6 +788,115 @@
   .japan-theme footer { color: #C9A96E; }
   .japan-theme .footer-tour { color: #FFB7C5; }
 
+  /* ===== COUNTDOWN TIMER ===== */
+  .countdown-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
+    background: rgba(26, 10, 0, 0.92);
+    border: 2px solid var(--orange);
+    border-radius: 12px;
+    padding: 10px 16px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(255, 107, 0, 0.3);
+  }
+  .countdown-label {
+    font-family: 'Bangers', cursive;
+    color: var(--yellow);
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .countdown-digits {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    justify-content: center;
+  }
+  .countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .countdown-number {
+    font-family: 'Bangers', cursive;
+    color: var(--red);
+    font-size: 1.6rem;
+    line-height: 1;
+    min-width: 36px;
+    text-align: center;
+  }
+  .countdown-sub {
+    font-family: 'Nunito', sans-serif;
+    color: var(--cream);
+    font-size: 0.45rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .countdown-sep {
+    font-family: 'Bangers', cursive;
+    color: var(--orange);
+    font-size: 1.2rem;
+    padding: 0 1px;
+    margin-bottom: 10px;
+    animation: cdBlink 1s step-end infinite;
+  }
+  @keyframes cdBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .countdown-done {
+    border-color: var(--green) !important;
+    box-shadow: 0 4px 20px rgba(0, 200, 83, 0.4) !important;
+    animation: cdCelebrate 0.6s ease forwards;
+  }
+  .countdown-done .countdown-label {
+    color: var(--green);
+  }
+  .countdown-message {
+    font-family: 'Bangers', cursive;
+    color: var(--yellow);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    animation: cdPulse 1.5s ease-in-out infinite;
+  }
+  @keyframes cdCelebrate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  @keyframes cdPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+  .japan-theme .countdown-container {
+    background: rgba(26, 26, 46, 0.92);
+    border-color: #C9A96E;
+    box-shadow: 0 4px 16px rgba(201, 169, 110, 0.3);
+  }
+  .japan-theme .countdown-number { color: #D4544A; }
+  .japan-theme .countdown-sep { color: #C9A96E; }
+  .japan-theme .countdown-label { color: #C9A96E; }
+  .japan-theme .countdown-done {
+    border-color: #2E8B57 !important;
+    box-shadow: 0 4px 20px rgba(46, 139, 87, 0.4) !important;
+  }
+  .japan-theme .countdown-done .countdown-label { color: #2E8B57; }
+  @media (max-width: 480px) {
+    .countdown-container {
+      top: 10px;
+      left: 10px;
+      padding: 8px 10px;
+    }
+    .countdown-number { font-size: 1.2rem; min-width: 28px; }
+    .countdown-label { font-size: 0.55rem; letter-spacing: 1px; }
+    .countdown-sub { font-size: 0.4rem; }
+    .countdown-message { font-size: 0.9rem; }
+  }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
     .crisis-grid { grid-template-columns: repeat(2, 1fr); }
@@ -818,6 +927,32 @@
 <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Switch to Japanese theme">
   <span class="toggle-icon">⛩️</span>
 </button>
+
+<!-- COUNTDOWN -->
+<div class="countdown-container" id="countdown">
+  <div class="countdown-label" id="countdown-label">⏳ COUNTDOWN TO THE END OF YOUTH</div>
+  <div class="countdown-digits" id="countdown-digits">
+    <div class="countdown-unit">
+      <span class="countdown-number" id="cd-days">--</span>
+      <span class="countdown-sub">DAYS</span>
+    </div>
+    <span class="countdown-sep">:</span>
+    <div class="countdown-unit">
+      <span class="countdown-number" id="cd-hours">--</span>
+      <span class="countdown-sub">HRS</span>
+    </div>
+    <span class="countdown-sep">:</span>
+    <div class="countdown-unit">
+      <span class="countdown-number" id="cd-mins">--</span>
+      <span class="countdown-sub">MIN</span>
+    </div>
+    <span class="countdown-sep">:</span>
+    <div class="countdown-unit">
+      <span class="countdown-number" id="cd-secs">--</span>
+      <span class="countdown-sub">SEC</span>
+    </div>
+  </div>
+</div>
 
 <!-- CONFETTI -->
 <div class="confetti-container" id="confetti"></div>
@@ -1270,6 +1405,12 @@
     currentFacts = isJapanTheme ? japanFacts : rockFacts;
     populateStrip();
 
+    // Swap countdown label
+    const cdLabel = document.getElementById('countdown-label');
+    if (cdLabel && !document.getElementById('countdown').classList.contains('countdown-done')) {
+      cdLabel.textContent = isJapanTheme ? '⏳ 若さの終焉まで' : '⏳ COUNTDOWN TO THE END OF YOUTH';
+    }
+
     // Persist theme choice
     try { localStorage.setItem('drumTheme', isJapanTheme ? 'japan' : 'rock'); } catch(e) {}
   }
@@ -1330,6 +1471,57 @@
     });
   }
   setupScrollReveal();
+
+  // ===== COUNTDOWN TIMER =====
+  (function() {
+    // March 7, 2026, 00:00:00 Bucharest time (EET = UTC+2)
+    const targetDate = new Date('2026-03-07T00:00:00+02:00').getTime();
+    const container = document.getElementById('countdown');
+    const label = document.getElementById('countdown-label');
+    const digits = document.getElementById('countdown-digits');
+    let done = false;
+
+    function updateCountdown() {
+      if (done) return;
+      const now = Date.now();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        done = true;
+        container.classList.add('countdown-done');
+        label.textContent = '💀 R.I.P. YOUR 30s';
+        digits.innerHTML = '<div class="countdown-message">THE END IS HERE! ⚰️</div>';
+        // Confetti burst
+        for (let i = 0; i < 40; i++) {
+          setTimeout(() => {
+            const piece = document.createElement('div');
+            piece.className = 'confetti-piece';
+            piece.style.left = Math.random() * 100 + '%';
+            piece.style.background = ['#FF2D2D','#FFD600','#FF6B00','#00C853','#FF69B4','#00BFFF'][Math.floor(Math.random()*6)];
+            piece.style.animationDuration = (2 + Math.random() * 3) + 's';
+            piece.style.animationDelay = '0s';
+            const cc = document.getElementById('confetti');
+            if (cc) cc.appendChild(piece);
+            setTimeout(() => piece.remove(), 5000);
+          }, i * 80);
+        }
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+      document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  })();
 </script>
 </body>
 </html>
