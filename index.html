@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🥁 DRUM VOUCHER 🥁</title>
-<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Fredoka+One&family=Nunito:wght@400;700;900&family=Noto+Serif+JP:wght@400;700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
   :root {
@@ -586,6 +586,189 @@
     box-shadow: 0 0 0 4px rgba(255,107,0,0.2);
   }
 
+  /* ===== TORII GATE TOGGLE ===== */
+  .theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 56px;
+    height: 56px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .theme-toggle:hover {
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+  }
+  .theme-toggle .toggle-icon { transition: transform 0.5s; display: block; }
+  .japan-theme .theme-toggle {
+    background: rgba(139,0,0,0.7);
+    box-shadow: 0 4px 16px rgba(139,0,0,0.4);
+  }
+  .japan-theme .theme-toggle .toggle-icon { transform: rotate(360deg); }
+
+  /* ===== SAKURA PETALS (Japan confetti) ===== */
+  .sakura-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    display: none;
+  }
+  .japan-theme .sakura-container { display: block; }
+  .japan-theme .confetti-container { display: none; }
+  .sakura {
+    position: absolute;
+    top: -20px;
+    color: #FFB7C5;
+    font-size: 18px;
+    animation: sakuraFall linear infinite;
+    opacity: 0.8;
+  }
+  @keyframes sakuraFall {
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; }
+    25%  { transform: translateY(25vh) translateX(30px) rotate(90deg); }
+    50%  { transform: translateY(50vh) translateX(-20px) rotate(180deg); }
+    75%  { transform: translateY(75vh) translateX(40px) rotate(270deg); }
+    100% { transform: translateY(110vh) translateX(10px) rotate(360deg); opacity: 0.2; }
+  }
+
+  /* ===== JAPAN THEME OVERRIDES ===== */
+  .japan-theme {
+    --red: #8B0000;
+    --yellow: #C9A96E;
+    --dark: #1a1a2e;
+    --orange: #D4544A;
+    --cream: #FFF5EE;
+    --green: #2E8B57;
+    background: #1a1a2e;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='28' font-size='28'%3E⛩%3C/text%3E%3C/svg%3E") 16 16, auto;
+  }
+
+  .japan-theme .hero {
+    background: radial-gradient(ellipse at top, #2a1a3e 0%, #1a1a2e 70%);
+  }
+
+  .japan-theme .birthday-banner {
+    background: linear-gradient(135deg, #8B0000, #D4544A);
+    color: #FFF5EE;
+    border-color: #C9A96E;
+    box-shadow: 0 0 0 8px #1a1a2e, 0 0 0 12px #C9A96E, 8px 8px 0 12px rgba(0,0,0,0.5);
+    font-family: 'Noto Serif JP', serif;
+  }
+
+  .japan-theme h1 {
+    font-family: 'Noto Serif JP', serif;
+    text-shadow: 6px 6px 0 #8B0000, 12px 12px 0 rgba(139,0,0,0.3);
+  }
+  .japan-theme h1 span { color: #C9A96E; }
+
+  .japan-theme .subtitle {
+    font-family: 'Noto Serif JP', serif;
+    color: #FFB7C5;
+  }
+
+  .japan-theme .drum-circle {
+    background: radial-gradient(circle at 35% 35%, #8B0000, #4a0000);
+    border-color: #C9A96E;
+    box-shadow:
+      inset 0 -20px 40px rgba(0,0,0,0.5),
+      0 0 0 6px #8B0000,
+      0 0 40px rgba(139,0,0,0.5),
+      0 20px 60px rgba(0,0,0,0.7);
+  }
+  .japan-theme .drum-visual:hover .drum-circle {
+    box-shadow:
+      inset 0 -20px 40px rgba(0,0,0,0.5),
+      0 0 0 6px #C9A96E,
+      0 0 60px rgba(201,169,110,0.7),
+      0 20px 60px rgba(0,0,0,0.7);
+  }
+
+  .japan-theme .facts-strip {
+    background: linear-gradient(90deg, #8B0000, #C9A96E, #8B0000);
+  }
+  .japan-theme .facts-inner span { color: #FFF5EE; }
+
+  .japan-theme .gift-card {
+    background: linear-gradient(135deg, #1a1a2e, #2a1a3e);
+    border-color: #C9A96E;
+    box-shadow: 0 0 0 6px rgba(201,169,110,0.15), 0 30px 60px rgba(0,0,0,0.5);
+  }
+  .japan-theme .gift-card::before { background: #1a1a2e; }
+  .japan-theme .gift-card h2 {
+    font-family: 'Noto Serif JP', serif;
+    color: #C9A96E;
+  }
+  .japan-theme .gift-card p { color: #e8d0c0; }
+  .japan-theme .gift-card p strong { color: #C9A96E; }
+  .japan-theme .funny-quote { color: #FFB7C5; }
+
+  .japan-theme .voucher-box {
+    background: #FFF5EE;
+    border-color: #C9A96E;
+    box-shadow: 8px 8px 0 #8B0000, 0 30px 60px rgba(0,0,0,0.5);
+  }
+  .japan-theme .voucher-box h3 { font-family: 'Noto Serif JP', serif; color: #1a1a2e; }
+  .japan-theme .input-group label { color: #1a1a2e; }
+  .japan-theme .input-group input,
+  .japan-theme .input-group textarea { border-color: #C9A96E; }
+  .japan-theme .input-group input:focus,
+  .japan-theme .input-group textarea:focus { border-color: #8B0000; box-shadow: 0 0 0 4px rgba(139,0,0,0.2); }
+  .japan-theme .submit-btn {
+    background: linear-gradient(135deg, #8B0000, #D4544A);
+    box-shadow: 0 6px 0 #4a0000, 0 10px 20px rgba(139,0,0,0.3);
+  }
+  .japan-theme .submit-btn:hover {
+    box-shadow: 0 9px 0 #4a0000, 0 14px 28px rgba(139,0,0,0.4);
+  }
+
+  .japan-theme .loc-card { border-color: #C9A96E; }
+  .japan-theme .loc-card:hover { border-color: #8B0000; box-shadow: 0 4px 12px rgba(139,0,0,0.15); }
+  .japan-theme .loc-card.selected { border-color: #8B0000; background: #FFF0E8; box-shadow: 0 0 0 3px rgba(139,0,0,0.2); }
+  .japan-theme .loc-radio { border-color: #C9A96E; }
+  .japan-theme .loc-card.selected .loc-radio { border-color: #8B0000; }
+  .japan-theme .loc-radio::after { background: #8B0000; }
+  .japan-theme .map-preview { border-color: #C9A96E; }
+
+  .japan-theme .now-playing .hint-text { color: #FFB7C5; }
+  .japan-theme .now-playing .eq-bars span { background: #C9A96E; }
+  .japan-theme .now-playing .song-title { color: #C9A96E; }
+  .japan-theme .now-playing .song-artist { color: #FFB7C5; }
+
+  .japan-theme .success-card {
+    background: linear-gradient(135deg, #1a2e1a, #0a1a0a);
+    border-color: #2E8B57;
+    box-shadow: 0 0 0 8px rgba(46,139,87,0.1), 8px 8px 0 #2E8B57;
+  }
+
+  .japan-theme footer { color: #C9A96E; }
+
+  /* snow overlay for snowboard vibe */
+  .snow-mountain {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.03) 60%, rgba(255,255,255,0.08) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .japan-theme .snow-mountain { display: block; }
+
   #yt-player { position: fixed; top: -9999px; left: -9999px; width: 1px; height: 1px; }
 
   /* ===== RESPONSIVE ===== */
@@ -598,8 +781,19 @@
 </head>
 <body>
 
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Switch to Japanese theme">
+  <span class="toggle-icon">⛩️</span>
+</button>
+
 <!-- CONFETTI -->
 <div class="confetti-container" id="confetti"></div>
+
+<!-- SAKURA (Japan theme) -->
+<div class="sakura-container" id="sakura"></div>
+
+<!-- SNOW MOUNTAIN (Japan theme) -->
+<div class="snow-mountain"></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1007,6 +1201,136 @@
     songInfo.classList.add('active');
     songTitle.textContent = song.title;
     songArtist.textContent = song.artist;
+  }
+
+  // ===== JAPAN THEME TOGGLE =====
+  let isJapanTheme = false;
+
+  // Original content storage
+  const originalContent = {
+    banner: '🎂 HAPPY BIRTHDAY! 🎂',
+    emojiRow: '🥁 🥁 🥁',
+    h1: 'IT\'S <span>DRUM</span><br>O\'CLOCK!',
+    subtitle: 'Someone loves you enough to let you make noise',
+    drumEmoji: '🥁',
+    giftTitle: '🎁 You\'ve Been Gifted a Drumming Adventure!',
+    giftP1: 'Somebody out there decided that what the world needs right now is <strong>YOU banging on drums</strong>. Bold move. Possibly reckless. Absolutely legendary. 🤘',
+    giftP2: 'This voucher grants you <strong>drum lessons</strong> — because playing drums is the closest thing to being a rockstar without actually having to write songs or wear leather pants. <em>(Leather pants optional.)</em>',
+    giftQuote: '"The rhythm is gonna get ya. It\'s basically gravity now." 🥁',
+    formTitle: '🎟️ Redeem Your Voucher',
+    formHint: 'Enter your secret code below and we\'ll get you drumming faster than you can say "paradiddle"',
+    playHint: '👆 HIT THE DRUM TO PLAY MUSIC!',
+    successEmoji: '🎉',
+    successTitle: 'VOUCHER REDEEMED!',
+    footerLine1: 'Produced by Bianca &amp; Bogdan 🎸🥁',
+    footerLine2: 'Mixing: Too Much Caffeine &nbsp;|&nbsp; Mastering: Pure Chaos',
+    footerLine3: 'A lot of pliculețe 🐱 for Pluto'
+  };
+
+  const japanContent = {
+    banner: '🎂 お誕生日おめでとう! 🎂',
+    emojiRow: '🏔️ ⛩️ 🏔️',
+    h1: 'IT\'S <span>太鼓</span><br>O\'CLOCK!',
+    subtitle: 'From the peaks of the mountain to the beat of the taiko',
+    drumEmoji: '🪘',
+    giftTitle: '⛩️ A Sacred Gift of Rhythm & Snow!',
+    giftP1: 'The ancient art of <strong>taiko drumming</strong> meets the adrenaline of snowboarding. Someone has gifted you the way of the drum — where every beat echoes through the mountains. 🏔️',
+    giftP2: 'This voucher grants you <strong>drum lessons</strong> — because a true warrior needs rhythm in their soul and thunder in their hands. <em>(Snowboard not included... yet.)</em>',
+    giftQuote: '"The taiko speaks what the mountain cannot say." 🪘⛩️',
+    formTitle: '🎟️ 券を引き換える (Redeem)',
+    formHint: 'Enter the sacred code and begin your path to becoming a taiko shredder 🏂🪘',
+    playHint: '👆 太鼓を叩け! (HIT THE TAIKO!)',
+    successEmoji: '⛩️',
+    successTitle: 'おめでとう! REDEEMED!',
+    footerLine1: 'Produced by Bianca &amp; Bogdan ⛩️🪘',
+    footerLine2: 'Mixed in the Mountains &nbsp;|&nbsp; Mastered by the Taiko Masters',
+    footerLine3: 'A lot of pliculețe 🐱 for Pluto'
+  };
+
+  // Create sakura petals
+  function createSakura() {
+    const container = document.getElementById('sakura');
+    if (container.children.length > 0) return;
+    const petals = ['🌸', '🩷', '✿', '❀', '🌸'];
+    for (let i = 0; i < 50; i++) {
+      const el = document.createElement('div');
+      el.classList.add('sakura');
+      el.textContent = petals[Math.floor(Math.random() * petals.length)];
+      el.style.left = Math.random() * 100 + '%';
+      el.style.fontSize = (12 + Math.random() * 16) + 'px';
+      el.style.animationDuration = (5 + Math.random() * 7) + 's';
+      el.style.animationDelay = (Math.random() * 8) + 's';
+      el.style.opacity = 0.4 + Math.random() * 0.5;
+      container.appendChild(el);
+    }
+  }
+
+  function toggleTheme() {
+    isJapanTheme = !isJapanTheme;
+    const body = document.body;
+    const content = isJapanTheme ? japanContent : originalContent;
+    const toggleIcon = document.querySelector('.toggle-icon');
+
+    body.classList.toggle('japan-theme', isJapanTheme);
+    toggleIcon.textContent = isJapanTheme ? '🥁' : '⛩️';
+    document.getElementById('theme-toggle').title = isJapanTheme ? 'Switch to Rock theme' : 'Switch to Japanese theme';
+
+    if (isJapanTheme) createSakura();
+
+    // Swap content
+    document.querySelector('.birthday-banner').innerHTML = content.banner;
+    document.querySelector('.drum-emoji-row').textContent = content.emojiRow;
+    document.querySelector('h1').innerHTML = content.h1;
+    document.querySelector('.subtitle').textContent = content.subtitle;
+    document.getElementById('drum-circle').textContent = content.drumEmoji;
+    document.querySelector('.gift-card h2').innerHTML = content.giftTitle;
+    const giftPs = document.querySelectorAll('.gift-card p');
+    giftPs[0].innerHTML = content.giftP1;
+    giftPs[1].innerHTML = content.giftP2;
+    document.querySelector('.funny-quote').innerHTML = content.giftQuote;
+    document.querySelector('.voucher-box h3').innerHTML = content.formTitle;
+    document.querySelector('.voucher-box .hint').innerHTML = content.formHint;
+    if (playHint.style.display !== 'none') playHint.innerHTML = content.playHint;
+
+    const successCard = document.querySelector('.success-card');
+    successCard.querySelector('.big-emoji').textContent = content.successEmoji;
+    successCard.querySelector('h2').textContent = content.successTitle;
+
+    const footer = document.querySelector('footer');
+    footer.innerHTML = content.footerLine1 + '<br>' + content.footerLine2 + '<br><br>' + content.footerLine3;
+
+    // Swap ticker facts
+    const japanFacts = [
+      '🪘 TAIKO DRUMS DATE BACK 2000+ YEARS',
+      '⛩️ お誕生日おめでとう ROCKSTAR',
+      '🏔️ SNOWBOARD + DRUMS = ULTIMATE SHRED',
+      '🌸 CHERRY BLOSSOMS FALL LIKE DRUMBEATS',
+      '🪘 ONE TAIKO CAN WEIGH OVER 300KG',
+      '⛩️ THE WAY OF THE DRUM IS THE WAY OF LIFE',
+      '🏂 SHRED THE MOUNTAIN, SHRED THE BEAT',
+      '🎌 BEST BIRTHDAY GIFT SINCE SUSHI',
+      '🪘 KODO DRUMMERS TRAIN LIKE ATHLETES',
+      '🌸 YOUR INNER SAMURAI DRUMMER AWAITS',
+    ];
+    const rockFacts = [
+      '🥁 DRUMS ARE THE HEARTBEAT OF MUSIC',
+      '🎂 HAPPY BIRTHDAY ROCKSTAR',
+      '🤘 RINGO STARR CHANGED THE WORLD',
+      '🥢 PARADIDDLE IS A REAL WORD',
+      '🎵 RHYTHM IS LIFE',
+      '🥁 NEIGHBORS WILL LOVE YOU',
+      '🎸 DRUMMERS HAVE MORE FUN',
+      '🎂 BEST BIRTHDAY GIFT EVER',
+      '🥁 BANG BANG BANG',
+      '🎉 YOUR INNER ROCKSTAR IS WAITING',
+    ];
+    const newFacts = isJapanTheme ? japanFacts : rockFacts;
+    strip.innerHTML = '';
+    [...newFacts, ...newFacts].forEach(f => {
+      const s = document.createElement('span');
+      s.textContent = f;
+      strip.appendChild(s);
+    });
   }
 </script>
 </body>
