@@ -902,10 +902,8 @@
 
   /* ===== COUNTDOWN TIMER ===== */
   .countdown-container {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 9999;
+    position: relative;
+    z-index: 2;
     background: rgba(26, 10, 0, 0.92);
     border: 2px solid var(--orange);
     border-radius: 12px;
@@ -913,6 +911,8 @@
     text-align: center;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 16px rgba(255, 107, 0, 0.3);
+    display: inline-block;
+    margin-bottom: 15px;
   }
   .countdown-label {
     font-family: 'Bangers', cursive;
@@ -999,8 +999,6 @@
   .japan-theme .countdown-done .countdown-label { color: #2E8B57; }
   @media (max-width: 480px) {
     .countdown-container {
-      top: 10px;
-      left: 10px;
       padding: 8px 10px;
     }
     .countdown-number { font-size: 1.2rem; min-width: 28px; }
@@ -1040,32 +1038,6 @@
   <span class="toggle-icon">⛩️</span>
 </button>
 
-<!-- COUNTDOWN -->
-<div class="countdown-container" id="countdown">
-  <div class="countdown-label" id="countdown-label">⏳ COUNTDOWN TO THE END OF YOUTH</div>
-  <div class="countdown-digits" id="countdown-digits">
-    <div class="countdown-unit">
-      <span class="countdown-number" id="cd-days">--</span>
-      <span class="countdown-sub">DAYS</span>
-    </div>
-    <span class="countdown-sep">:</span>
-    <div class="countdown-unit">
-      <span class="countdown-number" id="cd-hours">--</span>
-      <span class="countdown-sub">HRS</span>
-    </div>
-    <span class="countdown-sep">:</span>
-    <div class="countdown-unit">
-      <span class="countdown-number" id="cd-mins">--</span>
-      <span class="countdown-sub">MIN</span>
-    </div>
-    <span class="countdown-sep">:</span>
-    <div class="countdown-unit">
-      <span class="countdown-number" id="cd-secs">--</span>
-      <span class="countdown-sub">SEC</span>
-    </div>
-  </div>
-</div>
-
 <!-- CONFETTI -->
 <div class="confetti-container" id="confetti"></div>
 
@@ -1077,6 +1049,32 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero">
+  <!-- COUNTDOWN -->
+  <div class="countdown-container" id="countdown">
+    <div class="countdown-label" id="countdown-label">⏳ COUNTDOWN TO THE END OF YOUTH</div>
+    <div class="countdown-digits" id="countdown-digits">
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-days">--</span>
+        <span class="countdown-sub">DAYS</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-hours">--</span>
+        <span class="countdown-sub">HRS</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-mins">--</span>
+        <span class="countdown-sub">MIN</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-secs">--</span>
+        <span class="countdown-sub">SEC</span>
+      </div>
+    </div>
+  </div>
+
   <div class="birthday-banner" id="banner">⚰️ WELCOME TO YOUR FORTIES ⚰️</div>
   <div class="big-40">
     <span class="four">4</span><span class="zero">0</span>
