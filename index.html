@@ -1322,8 +1322,10 @@
     '🎉 YOUR INNER ROCKSTAR IS WAITING',
   ];
   const strip = document.getElementById('strip');
-  // Duplicate for seamless loop
-  [...facts, ...facts].forEach(f => {
+  // Full list repeated 5 times, then duplicated for seamless loop
+  let expanded = [];
+  for (let i = 0; i < 5; i++) expanded = expanded.concat(facts);
+  [...expanded, ...expanded].forEach(f => {
     const s = document.createElement('span');
     s.textContent = f;
     strip.appendChild(s);
@@ -1661,7 +1663,10 @@
     ];
     const newFacts = isJapanTheme ? japanFacts : rockFacts;
     strip.innerHTML = '';
-    [...newFacts, ...newFacts].forEach(f => {
+    // Full list repeated 5 times, then duplicated for seamless loop
+    let expanded = [];
+    for (let i = 0; i < 5; i++) expanded = expanded.concat(newFacts);
+    [...expanded, ...expanded].forEach(f => {
       const s = document.createElement('span');
       s.textContent = f;
       strip.appendChild(s);

@@ -128,7 +128,7 @@
   .facts-inner {
     display: flex;
     white-space: nowrap;
-    animation: scrollStrip 25s linear infinite;
+    animation: scrollStrip 20s linear infinite;
   }
   @keyframes scrollStrip {
     from { transform: translateX(0); }
@@ -1470,7 +1470,10 @@
   function populateStrip() {
     const strip = document.getElementById('strip');
     strip.innerHTML = '';
-    [...currentFacts, ...currentFacts].forEach(f => {
+    // Full list repeated 5 times, then duplicated for seamless loop
+    let expanded = [];
+    for (let i = 0; i < 5; i++) expanded = expanded.concat(currentFacts);
+    [...expanded, ...expanded].forEach(f => {
       const s = document.createElement('span');
       s.textContent = f;
       strip.appendChild(s);
