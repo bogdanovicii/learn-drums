@@ -1132,8 +1132,8 @@
     });
   }
 
-  // ===== YOUTUBE MUSIC PLAYLIST =====
-  const playlist = [
+  // ===== YOUTUBE MUSIC PLAYLISTS =====
+  const rockPlaylist = [
     { id: 'tAGnKpE4NCI', title: 'Nothing Else Matters', artist: 'Metallica' },
     { id: 'xnKhsTXoKCI', title: 'Thunderstruck', artist: 'AC/DC' },
     { id: 'fJ9rUzIMcZQ', title: 'Bohemian Rhapsody', artist: 'Queen' },
@@ -1143,6 +1143,15 @@
     { id: 'pAgnJDJN4VA', title: 'Back In Black', artist: 'AC/DC' },
     { id: 'dQw4w9WgXcQ', title: 'Never Gonna Give You Up', artist: 'Rick Astley 😏' },
   ];
+  const japanPlaylist = [
+    { id: 'RbJKb3nN1-E', title: 'Rockstar', artist: 'Ado' },
+    { id: 'fV_bCMYGCHw', title: 'Unravel (Tokyo Ghoul)', artist: 'TK from Ling Tosite Sigure' },
+    { id: 'cK3NMZAUKGw', title: 'Gurenge (Demon Slayer)', artist: 'LiSA' },
+    { id: 'dyIilW_eBjc', title: 'Inferno (Fire Force)', artist: 'Mrs. GREEN APPLE' },
+    { id: 'iS2s0hnoFSM', title: 'Shinzou wo Sasageyo', artist: 'Linked Horizon' },
+    { id: 'tLQLa6lM3Us', title: 'Giri Giri', artist: 'Ado' },
+  ];
+  let playlist = rockPlaylist;
 
   let ytPlayer = null;
   let currentSongIndex = -1;
@@ -1298,6 +1307,17 @@
 
     const footer = document.querySelector('footer');
     footer.innerHTML = content.footerLine1 + '<br>' + content.footerLine2 + '<br><br>' + content.footerLine3;
+
+    // Swap playlist
+    playlist = isJapanTheme ? japanPlaylist : rockPlaylist;
+    currentSongIndex = -1;
+    if (isPlaying && ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+      ytPlayer.pauseVideo();
+      isPlaying = false;
+      songInfo.classList.remove('active');
+      playHint.style.display = '';
+      playHint.innerHTML = content.playHint;
+    }
 
     // Swap ticker facts
     const japanFacts = [
