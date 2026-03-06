@@ -771,6 +771,51 @@
 
   #yt-player { position: fixed; top: -9999px; left: -9999px; width: 1px; height: 1px; }
 
+  /* ===== FORTIES PORTAL ===== */
+  .forties-portal {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin: 10px auto 40px;
+    padding: 0 20px;
+  }
+  .forties-btn {
+    display: inline-block;
+    padding: 18px 40px;
+    background: linear-gradient(135deg, #333, #111);
+    color: var(--yellow);
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    letter-spacing: 4px;
+    border: 4px solid var(--orange);
+    border-radius: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 6px 0 #8b1a00, 0 10px 20px rgba(255,45,45,0.3);
+    animation: wiggle 2s ease-in-out infinite;
+  }
+  .forties-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 9px 0 #8b1a00, 0 14px 28px rgba(255,45,45,0.4);
+  }
+  .forties-hint {
+    color: #ff9966;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    font-style: italic;
+  }
+  .japan-theme .forties-btn {
+    background: linear-gradient(135deg, #1a1a2e, #2a1a3e);
+    border-color: #C9A96E;
+    color: #C9A96E;
+    box-shadow: 0 6px 0 #4a0000, 0 10px 20px rgba(139,0,0,0.3);
+  }
+  .japan-theme .forties-btn:hover {
+    box-shadow: 0 9px 0 #4a0000, 0 14px 28px rgba(139,0,0,0.4);
+  }
+  .japan-theme .forties-hint { color: #FFB7C5; }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 480px) {
     .voucher-box, .gift-card { padding: 25px 20px; }
@@ -842,6 +887,12 @@
   <p class="funny-quote">
     "The rhythm is gonna get ya. It's basically gravity now." 🥁
   </p>
+</div>
+
+<!-- FORTIES PORTAL -->
+<div class="forties-portal">
+  <a href="forties.html" class="forties-btn">⚰️ ENTER YOUR FORTIES ⚰️</a>
+  <p class="forties-hint">(Abandon all youth, ye who enter here)</p>
 </div>
 
 <!-- VOUCHER FORM -->
@@ -1349,7 +1400,15 @@
       s.textContent = f;
       strip.appendChild(s);
     });
+
+    // Persist theme choice across pages
+    try { localStorage.setItem('drumTheme', isJapanTheme ? 'japan' : 'rock'); } catch(e) {}
   }
+
+  // Load stored theme
+  try {
+    if (localStorage.getItem('drumTheme') === 'japan') toggleTheme();
+  } catch(e) {}
 </script>
 </body>
 </html>

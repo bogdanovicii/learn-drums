@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚰️ WELCOME TO YOUR FORTIES ⚰️</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Fredoka+One&family=Nunito:wght@400;700;900&family=Noto+Serif+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #FF2D2D;
+    --yellow: #FFD600;
+    --dark: #1A0A00;
+    --orange: #FF6B00;
+    --cream: #FFF8E7;
+    --green: #00C853;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='28' font-size='28'%3E🥁%3C/text%3E%3C/svg%3E") 16 16, auto;
+  }
+
+  /* ===== CONFETTI ===== */
+  .confetti-container {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .confetti-piece {
+    position: absolute;
+    width: 10px; height: 16px;
+    border-radius: 2px;
+    animation: confettiFall linear infinite;
+    opacity: 0.85;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0.3; }
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 50px 20px 30px;
+    background: radial-gradient(ellipse at top, #2a0a00 0%, var(--dark) 70%);
+  }
+  .birthday-banner {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--dark);
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    padding: 10px 30px;
+    border-radius: 50px;
+    letter-spacing: 4px;
+    border: 4px solid var(--orange);
+    box-shadow: 0 0 0 8px var(--dark), 0 0 0 12px var(--yellow), 8px 8px 0 12px rgba(0,0,0,0.5);
+    animation: wiggle 1.5s ease-in-out infinite;
+    margin-bottom: 10px;
+  }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-2deg) scale(1); }
+    50%      { transform: rotate(2deg) scale(1.03); }
+  }
+
+  .big-40 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(8rem, 25vw, 16rem);
+    color: var(--yellow);
+    text-shadow: 8px 8px 0 var(--red), 16px 16px 0 rgba(255,45,45,0.2);
+    line-height: 1;
+    animation: fortyPulse 2s ease-in-out infinite;
+    margin: 10px 0;
+    user-select: none;
+  }
+  .big-40 .four { display: inline-block; animation: wiggle 1.5s ease-in-out infinite; }
+  .big-40 .zero { display: inline-block; animation: bounce 0.8s ease-in-out infinite alternate; }
+  @keyframes fortyPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-12px); }
+  }
+
+  h1 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2rem, 7vw, 5rem);
+    color: var(--cream);
+    text-shadow: 6px 6px 0 var(--red), 12px 12px 0 rgba(255,45,45,0.2);
+    letter-spacing: 6px;
+    margin-bottom: 10px;
+  }
+  h1 span { color: var(--yellow); }
+
+  .subtitle {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+    color: var(--orange);
+    margin-bottom: 4px;
+  }
+  .subtitle-alt {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    color: var(--cream);
+    opacity: 0.6;
+    font-style: italic;
+  }
+
+  /* ===== SCROLLING STRIP ===== */
+  .facts-strip {
+    position: relative;
+    z-index: 1;
+    background: var(--yellow);
+    padding: 20px 0;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .facts-inner {
+    display: flex;
+    gap: 60px;
+    white-space: nowrap;
+    animation: scrollStrip 25s linear infinite;
+  }
+  @keyframes scrollStrip {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .facts-inner span {
+    font-family: 'Bangers', cursive;
+    font-size: 1.3rem;
+    color: var(--dark);
+    letter-spacing: 2px;
+  }
+
+  /* ===== SECTION BASE ===== */
+  .forties-section {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+  }
+  .section-title {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: var(--yellow);
+    text-align: center;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+  }
+  .section-subtitle {
+    text-align: center;
+    color: var(--orange);
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+
+  /* ===== TOMBSTONE ===== */
+  .tombstone-card { text-align: center; }
+  .tombstone {
+    display: inline-block;
+    position: relative;
+    animation: tombstoneRise 1s ease-out;
+  }
+  @keyframes tombstoneRise {
+    from { transform: translateY(60px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .tombstone-body {
+    background: linear-gradient(180deg, #777, #555);
+    color: #eee;
+    padding: 35px 45px 25px;
+    border-radius: 80px 80px 0 0;
+    min-width: 280px;
+    border: 5px solid #999;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 2px 10px rgba(255,255,255,0.1);
+    font-family: 'Nunito', sans-serif;
+  }
+  .tombstone-rip {
+    font-family: 'Bangers', cursive;
+    font-size: 2.8rem;
+    letter-spacing: 10px;
+    color: var(--cream);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+  .tombstone-name {
+    font-family: 'Bangers', cursive;
+    font-size: 2rem;
+    color: var(--yellow);
+    margin: 8px 0;
+    letter-spacing: 4px;
+  }
+  .tombstone-dates {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 8px;
+  }
+  .tombstone-epitaph {
+    font-style: italic;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #bbb;
+    line-height: 1.6;
+  }
+  .tombstone-ground {
+    height: 25px;
+    background: linear-gradient(to bottom, #4a3520, #2a1a0a);
+    border-radius: 0 0 4px 4px;
+    position: relative;
+  }
+  .tombstone-ground::after {
+    content: '🌱  🌱  🌱';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+  }
+
+  .eulogy {
+    margin-top: 35px;
+    background: linear-gradient(135deg, #2d0a00, #1a0500);
+    border: 3px solid var(--orange);
+    border-radius: 24px;
+    padding: 35px 40px;
+    box-shadow: 0 0 0 6px rgba(255,107,0,0.15), 0 30px 60px rgba(0,0,0,0.5);
+    text-align: left;
+  }
+  .eulogy h2 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    color: var(--yellow);
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  .eulogy > p { color: #ffcba0; font-size: 1rem; line-height: 1.6; margin-bottom: 15px; text-align: center; }
+  .eulogy-list {
+    list-style: none;
+    padding: 0;
+  }
+  .eulogy-list li {
+    color: #ffcba0;
+    font-size: 1rem;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,107,0,0.15);
+    transition: transform 0.2s, color 0.2s;
+  }
+  .eulogy-list li:hover {
+    transform: translateX(8px);
+    color: var(--yellow);
+  }
+  .eulogy-list li:last-child { border-bottom: none; }
+
+  /* ===== WARRANTY CARD ===== */
+  .warranty-card {
+    background: var(--cream);
+    border-radius: 4px;
+    padding: 40px;
+    border: 3px solid #999;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  .warranty-stamp {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-25deg);
+    font-family: 'Bangers', cursive;
+    font-size: clamp(6rem, 18vw, 12rem);
+    color: rgba(255,45,45,0.15);
+    letter-spacing: 20px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .warranty-header {
+    text-align: center;
+    border-bottom: 2px dashed #aaa;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .warranty-icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+  .warranty-header h2 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    color: var(--dark);
+    letter-spacing: 3px;
+  }
+  .warranty-status {
+    font-family: 'Bangers', cursive;
+    font-size: 1.5rem;
+    color: var(--red);
+    letter-spacing: 4px;
+    margin-top: 5px;
+  }
+  .warranty-body { position: relative; z-index: 1; }
+  .warranty-notice {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .warranty-parts { display: flex; flex-direction: column; gap: 8px; }
+  .part-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255,45,45,0.06);
+    border: 1px solid rgba(255,45,45,0.15);
+    border-radius: 8px;
+    font-weight: 700;
+    color: var(--dark);
+    font-size: 0.95rem;
+  }
+  .part-status {
+    font-size: 0.7rem;
+    color: var(--red);
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-align: right;
+  }
+  .warranty-fine-print {
+    margin-top: 20px;
+    font-size: 0.75rem;
+    color: #999;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* ===== MIDLIFE CRISIS OPTIONS ===== */
+  .crisis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .crisis-card {
+    background: linear-gradient(135deg, #2d0a00, #1a0500);
+    border: 3px solid rgba(255,107,0,0.3);
+    border-radius: 16px;
+    padding: 25px 20px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    position: relative;
+    cursor: default;
+  }
+  .crisis-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    border-color: var(--orange);
+  }
+  .crisis-card.correct {
+    border-color: var(--yellow);
+    background: linear-gradient(135deg, #2d1a00, #1a0f00);
+    box-shadow: 0 0 30px rgba(255,214,0,0.2);
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(255,214,0,0.2); }
+    50% { box-shadow: 0 0 40px rgba(255,214,0,0.4); }
+  }
+  .crisis-emoji { font-size: 3rem; display: block; margin-bottom: 10px; }
+  .crisis-card h3 {
+    font-family: 'Bangers', cursive;
+    color: var(--cream);
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .crisis-card p { color: #ffcba0; font-size: 0.88rem; line-height: 1.4; }
+  .correct-badge {
+    display: inline-block;
+    margin-top: 10px;
+    background: var(--yellow);
+    color: var(--dark);
+    font-family: 'Bangers', cursive;
+    font-size: 1rem;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 2px;
+    animation: wiggle 1.5s ease-in-out infinite;
+  }
+
+  /* ===== STATS COUNTERS ===== */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .stat-card {
+    background: linear-gradient(135deg, #2d0a00, #1a0500);
+    border: 2px solid var(--orange);
+    border-radius: 16px;
+    padding: 25px 15px;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--yellow);
+  }
+  .stat-number {
+    display: block;
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--yellow);
+    letter-spacing: 2px;
+  }
+  .stat-label {
+    display: block;
+    margin-top: 8px;
+    color: #ffcba0;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+  .stat-card:last-child {
+    border-color: var(--yellow);
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+
+  /* ===== BEFORE vs AFTER ===== */
+  .comparison-table {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .compare-row {
+    display: flex;
+    align-items: stretch;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+  }
+  .compare-row:hover {
+    transform: scale(1.02);
+  }
+  .compare-before, .compare-after {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .compare-before {
+    background: linear-gradient(135deg, #1a3a00, #0a2000);
+    color: #aaffaa;
+    border: 2px solid var(--green);
+    border-right: none;
+  }
+  .compare-after {
+    background: linear-gradient(135deg, #3a0a00, #200500);
+    color: #ffaaaa;
+    border: 2px solid var(--red);
+    border-left: none;
+  }
+  .compare-vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark);
+    color: var(--yellow);
+    font-family: 'Bangers', cursive;
+    font-size: 1.2rem;
+    padding: 0 14px;
+    letter-spacing: 2px;
+    min-width: 50px;
+  }
+
+  /* ===== STARTER PACK ===== */
+  .starter-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .starter-item {
+    background: linear-gradient(135deg, #2d0a00, #1a0500);
+    border: 2px solid rgba(255,107,0,0.25);
+    border-radius: 14px;
+    padding: 20px 14px;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+    color: #ffcba0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: default;
+  }
+  .starter-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--orange);
+  }
+  .starter-emoji {
+    display: block;
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+  }
+  .starter-item.highlight-item {
+    border-color: var(--yellow);
+    background: linear-gradient(135deg, #2d1a00, #1a0f00);
+    color: var(--yellow);
+    animation: glowPulse 2s ease-in-out infinite;
+    grid-column: span 2;
+  }
+
+  /* ===== MOTIVATIONAL CLOSE ===== */
+  .motivational-card {
+    background: linear-gradient(135deg, #003300, #001a00);
+    border: 4px solid var(--green);
+    border-radius: 24px;
+    padding: 50px 40px;
+    text-align: center;
+    box-shadow: 0 0 0 8px rgba(0,200,83,0.1), 8px 8px 0 var(--green);
+  }
+  .motivational-card h2 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: var(--green);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
+  .motivational-text {
+    color: #aaffcc;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .motivational-text.highlight-text {
+    color: var(--yellow);
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+  }
+  .back-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 18px 36px;
+    background: linear-gradient(135deg, var(--red), var(--orange));
+    color: white;
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    letter-spacing: 4px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 6px 0 #8b1a00, 0 10px 20px rgba(255,45,45,0.3);
+    text-decoration: none;
+    animation: wiggle 2s ease-in-out infinite;
+  }
+  .back-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 0 #8b1a00, 0 14px 28px rgba(255,45,45,0.4);
+  }
+  .back-hint {
+    margin-top: 12px;
+    color: #66ffaa;
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 30px;
+    color: #5a3020;
+    font-size: 0.85rem;
+  }
+  .footer-tour {
+    display: block;
+    margin-top: 8px;
+    font-family: 'Bangers', cursive;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: #7a4a30;
+  }
+
+  /* ===== TORII GATE TOGGLE ===== */
+  .theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 56px;
+    height: 56px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .theme-toggle:hover {
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+  }
+  .theme-toggle .toggle-icon { transition: transform 0.5s; display: block; }
+
+  /* ===== SAKURA PETALS ===== */
+  .sakura-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    display: none;
+  }
+  .sakura {
+    position: absolute;
+    top: -20px;
+    color: #FFB7C5;
+    font-size: 18px;
+    animation: sakuraFall linear infinite;
+    opacity: 0.8;
+  }
+  @keyframes sakuraFall {
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; }
+    25%  { transform: translateY(25vh) translateX(30px) rotate(90deg); }
+    50%  { transform: translateY(50vh) translateX(-20px) rotate(180deg); }
+    75%  { transform: translateY(75vh) translateX(40px) rotate(270deg); }
+    100% { transform: translateY(110vh) translateX(10px) rotate(360deg); opacity: 0.2; }
+  }
+
+  .snow-mountain {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.03) 60%, rgba(255,255,255,0.08) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== JAPAN THEME ===== */
+  .japan-theme {
+    --red: #8B0000;
+    --yellow: #C9A96E;
+    --dark: #1a1a2e;
+    --orange: #D4544A;
+    --cream: #FFF5EE;
+    --green: #2E8B57;
+    background: #1a1a2e;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='28' font-size='28'%3E⛩%3C/text%3E%3C/svg%3E") 16 16, auto;
+  }
+
+  .japan-theme .sakura-container { display: block; }
+  .japan-theme .confetti-container { display: none; }
+  .japan-theme .snow-mountain { display: block; }
+
+  .japan-theme .hero {
+    background: radial-gradient(ellipse at top, #2a1a3e 0%, #1a1a2e 70%);
+  }
+  .japan-theme .birthday-banner {
+    background: linear-gradient(135deg, #8B0000, #D4544A);
+    color: #FFF5EE;
+    border-color: #C9A96E;
+    box-shadow: 0 0 0 8px #1a1a2e, 0 0 0 12px #C9A96E, 8px 8px 0 12px rgba(0,0,0,0.5);
+    font-family: 'Noto Serif JP', serif;
+  }
+  .japan-theme .big-40 {
+    color: #C9A96E;
+    text-shadow: 8px 8px 0 #8B0000, 16px 16px 0 rgba(139,0,0,0.2);
+  }
+  .japan-theme h1 {
+    font-family: 'Noto Serif JP', serif;
+    text-shadow: 6px 6px 0 #8B0000, 12px 12px 0 rgba(139,0,0,0.3);
+  }
+  .japan-theme h1 span { color: #C9A96E; }
+  .japan-theme .subtitle { font-family: 'Noto Serif JP', serif; color: #FFB7C5; }
+
+  .japan-theme .theme-toggle {
+    background: rgba(139,0,0,0.7);
+    box-shadow: 0 4px 16px rgba(139,0,0,0.4);
+  }
+  .japan-theme .theme-toggle .toggle-icon { transform: rotate(360deg); }
+
+  .japan-theme .facts-strip {
+    background: linear-gradient(90deg, #8B0000, #C9A96E, #8B0000);
+  }
+  .japan-theme .facts-inner span { color: #FFF5EE; }
+
+  .japan-theme .section-title { color: #C9A96E; }
+  .japan-theme .section-subtitle { color: #FFB7C5; }
+
+  .japan-theme .tombstone-body {
+    background: linear-gradient(180deg, #4a3050, #2a1a3e);
+    border-color: #C9A96E;
+  }
+  .japan-theme .tombstone-name { color: #C9A96E; }
+  .japan-theme .tombstone-ground { background: linear-gradient(to bottom, #1a1a2e, #0a0a1e); }
+
+  .japan-theme .eulogy {
+    background: linear-gradient(135deg, #1a1a2e, #2a1a3e);
+    border-color: #C9A96E;
+    box-shadow: 0 0 0 6px rgba(201,169,110,0.15), 0 30px 60px rgba(0,0,0,0.5);
+  }
+  .japan-theme .eulogy h2 { font-family: 'Noto Serif JP', serif; color: #C9A96E; }
+  .japan-theme .eulogy > p { color: #e8d0c0; }
+  .japan-theme .eulogy-list li { color: #e8d0c0; border-color: rgba(201,169,110,0.15); }
+  .japan-theme .eulogy-list li:hover { color: #C9A96E; }
+
+  .japan-theme .warranty-card { background: #FFF5EE; border-color: #C9A96E; }
+  .japan-theme .warranty-stamp { color: rgba(139,0,0,0.15); }
+  .japan-theme .warranty-status { color: #8B0000; }
+  .japan-theme .part-item { background: rgba(139,0,0,0.06); border-color: rgba(139,0,0,0.15); }
+  .japan-theme .part-status { color: #8B0000; }
+
+  .japan-theme .crisis-card {
+    background: linear-gradient(135deg, #1a1a2e, #2a1a3e);
+    border-color: rgba(201,169,110,0.3);
+  }
+  .japan-theme .crisis-card:hover { border-color: #C9A96E; }
+  .japan-theme .crisis-card.correct {
+    border-color: #C9A96E;
+    background: linear-gradient(135deg, #2a1a2e, #1a1a3e);
+    box-shadow: 0 0 30px rgba(201,169,110,0.2);
+  }
+  .japan-theme .crisis-card h3 { color: #FFF5EE; }
+  .japan-theme .crisis-card p { color: #e8d0c0; }
+  .japan-theme .correct-badge { background: #C9A96E; color: #1a1a2e; }
+
+  .japan-theme .stat-card {
+    background: linear-gradient(135deg, #1a1a2e, #2a1a3e);
+    border-color: #C9A96E;
+  }
+  .japan-theme .stat-number { color: #C9A96E; }
+  .japan-theme .stat-label { color: #e8d0c0; }
+
+  .japan-theme .compare-before {
+    background: linear-gradient(135deg, #0a2a1a, #001a0a);
+    border-color: #2E8B57;
+    color: #aaffcc;
+  }
+  .japan-theme .compare-after {
+    background: linear-gradient(135deg, #2a0a1a, #1a0010);
+    border-color: #8B0000;
+    color: #ffbbcc;
+  }
+  .japan-theme .compare-vs { background: #1a1a2e; color: #C9A96E; }
+
+  .japan-theme .starter-item {
+    background: linear-gradient(135deg, #1a1a2e, #2a1a3e);
+    border-color: rgba(201,169,110,0.25);
+    color: #e8d0c0;
+  }
+  .japan-theme .starter-item:hover { border-color: #C9A96E; }
+  .japan-theme .starter-item.highlight-item {
+    border-color: #C9A96E;
+    background: linear-gradient(135deg, #2a1a2e, #1a1a3e);
+    color: #C9A96E;
+  }
+
+  .japan-theme .motivational-card {
+    background: linear-gradient(135deg, #0a2a1a, #001a0a);
+    border-color: #2E8B57;
+    box-shadow: 0 0 0 8px rgba(46,139,87,0.1), 8px 8px 0 #2E8B57;
+  }
+  .japan-theme .motivational-card h2 { font-family: 'Noto Serif JP', serif; color: #2E8B57; }
+  .japan-theme .motivational-text { color: #aaffcc; }
+  .japan-theme .motivational-text.highlight-text { color: #C9A96E; }
+  .japan-theme .back-btn {
+    background: linear-gradient(135deg, #8B0000, #D4544A);
+    box-shadow: 0 6px 0 #4a0000, 0 10px 20px rgba(139,0,0,0.3);
+  }
+  .japan-theme .back-hint { color: #aaffcc; }
+
+  .japan-theme footer { color: #C9A96E; }
+  .japan-theme .footer-tour { color: #FFB7C5; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .crisis-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .starter-grid { grid-template-columns: repeat(3, 1fr); }
+    .starter-item.highlight-item { grid-column: span 3; }
+  }
+  @media (max-width: 480px) {
+    .crisis-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .starter-grid { grid-template-columns: repeat(2, 1fr); }
+    .starter-item.highlight-item { grid-column: span 2; }
+    .compare-row { flex-direction: column; }
+    .compare-vs { padding: 8px; min-width: unset; }
+    .compare-before { border-right: 2px solid var(--green); border-bottom: none; }
+    .compare-after { border-left: 2px solid var(--red); border-top: none; }
+    .warranty-card { padding: 25px 18px; }
+    .tombstone-body { padding: 25px 20px; min-width: unset; }
+    .eulogy { padding: 25px 20px; }
+    .motivational-card { padding: 30px 20px; }
+    .big-40 { font-size: clamp(6rem, 30vw, 10rem); }
+  }
+</style>
+</head>
+<body>
+
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Switch to Japanese theme">
+  <span class="toggle-icon">⛩️</span>
+</button>
+
+<!-- CONFETTI -->
+<div class="confetti-container" id="confetti"></div>
+
+<!-- SAKURA -->
+<div class="sakura-container" id="sakura"></div>
+
+<!-- SNOW MOUNTAIN -->
+<div class="snow-mountain"></div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="birthday-banner" id="banner">⚰️ WELCOME TO YOUR FORTIES ⚰️</div>
+  <div class="big-40">
+    <span class="four">4</span><span class="zero">0</span>
+  </div>
+  <h1 id="hero-title">THE <span>FOURTH</span><br>DECADE!</h1>
+  <p class="subtitle" id="hero-subtitle">40 years of practice runs. NOW the show begins.</p>
+  <p class="subtitle-alt" id="hero-alt">Old enough to know better. Young enough to drum louder.</p>
+</section>
+
+<!-- ===== SCROLLING STRIP ===== -->
+<div class="facts-strip">
+  <div class="facts-inner" id="strip"></div>
+</div>
+
+<!-- ===== R.I.P. YOUR 30s ===== -->
+<section class="forties-section">
+  <div class="tombstone-card">
+    <div class="tombstone">
+      <div class="tombstone-body">
+        <p class="tombstone-rip">R.I.P.</p>
+        <p class="tombstone-name">YOUR 30s</p>
+        <p class="tombstone-dates">2016 — 2026</p>
+        <p class="tombstone-epitaph">They died doing what they loved:<br>pretending to be young.</p>
+      </div>
+      <div class="tombstone-ground"></div>
+    </div>
+
+    <div class="eulogy">
+      <h2>⚰️ The Eulogy</h2>
+      <p>Dearly beloved, we are gathered here to say goodbye to things that no longer exist:</p>
+      <ul class="eulogy-list">
+        <li>💀 Your metabolism — gone, like your ability to eat carbs without guilt</li>
+        <li>💀 Eating without consequences — one slice of pizza is now a 3-day commitment</li>
+        <li>💀 Staying up past 10pm — voluntarily, anyway</li>
+        <li>💀 Sitting on the floor and standing back up gracefully</li>
+        <li>💀 Recovery time under 48 hours — those days are OVER</li>
+        <li>💀 Knowing what the kids are talking about — "no cap fr fr" means nothing to you</li>
+        <li>💀 Silence in your joints — every move is now a percussion solo</li>
+        <li>💀 Reading a menu without squinting — the font didn't get smaller, YOU got older</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WARRANTY EXPIRED ===== -->
+<section class="forties-section">
+  <div class="warranty-card">
+    <div class="warranty-stamp">VOID</div>
+    <div class="warranty-header">
+      <span class="warranty-icon">📋</span>
+      <h2>MANUFACTURER'S WARRANTY</h2>
+      <p class="warranty-status">STATUS: ❌ EXPIRED</p>
+    </div>
+    <div class="warranty-body">
+      <p class="warranty-notice">
+        This human unit was covered under a limited 39-year warranty.<br>
+        All coverage has now been <strong>permanently terminated</strong>.
+      </p>
+      <div class="warranty-parts">
+        <div class="part-item">
+          <span>🦴 Knees</span>
+          <span class="part-status">NO LONGER COVERED</span>
+        </div>
+        <div class="part-item">
+          <span>🔙 Back</span>
+          <span class="part-status">SOLD AS-IS CONDITION</span>
+        </div>
+        <div class="part-item">
+          <span>🔥 Metabolism</span>
+          <span class="part-status">PERMANENTLY THROTTLED</span>
+        </div>
+        <div class="part-item">
+          <span>👀 Eyesight</span>
+          <span class="part-status">REQUIRES ADDON (GLASSES DLC)</span>
+        </div>
+        <div class="part-item">
+          <span>🧠 Memory</span>
+          <span class="part-status">INTERMITTENT FAILURES EXPECTED</span>
+        </div>
+        <div class="part-item">
+          <span>💤 Sleep Schedule</span>
+          <span class="part-status">FACTORY RESET FAILED</span>
+        </div>
+        <div class="part-item">
+          <span>⚡ Energy Levels</span>
+          <span class="part-status">RUNNING ON FUMES</span>
+        </div>
+        <div class="part-item">
+          <span>💪 Core Strength</span>
+          <span class="part-status">404 NOT FOUND</span>
+        </div>
+      </div>
+      <p class="warranty-fine-print">
+        * For all inquiries, please contact Nobody. This unit is now sold AS-IS.<br>
+        Extended warranty available through: Ibuprofen, Naps, and Denial.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MIDLIFE CRISIS OPTIONS ===== -->
+<section class="forties-section">
+  <h2 class="section-title">🚨 MIDLIFE CRISIS OPTIONS 🚨</h2>
+  <p class="section-subtitle">Choose your path wisely. (There is only one correct answer.)</p>
+  <div class="crisis-grid">
+    <div class="crisis-card">
+      <span class="crisis-emoji">🏎️</span>
+      <h3>Sports Car</h3>
+      <p>Expensive. Impractical. Still stuck in Bucharest traffic.</p>
+    </div>
+    <div class="crisis-card correct">
+      <span class="crisis-emoji">🥁</span>
+      <h3>DRUMS</h3>
+      <p>CORRECT CHOICE. Loud. Therapeutic. Peak human existence.</p>
+      <span class="correct-badge">✅ THE ONE</span>
+    </div>
+    <div class="crisis-card">
+      <span class="crisis-emoji">🏃</span>
+      <h3>Marathon</h3>
+      <p>Your knees just filed a restraining order against you.</p>
+    </div>
+    <div class="crisis-card">
+      <span class="crisis-emoji">💪</span>
+      <h3>Tattoo Sleeve</h3>
+      <p>Bold move. Until gravity starts working on your canvas.</p>
+    </div>
+    <div class="crisis-card">
+      <span class="crisis-emoji">🏂</span>
+      <h3>Snowboard in Japan</h3>
+      <p>Actually... this one's pretty legendary too. 🗾</p>
+    </div>
+    <div class="crisis-card">
+      <span class="crisis-emoji">🐱</span>
+      <h3>Adopt 12 Cats</h3>
+      <p>Valid option. But can they keep a beat? Didn't think so.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 40 YEARS IN NUMBERS ===== -->
+<section class="forties-section">
+  <h2 class="section-title">📊 40 YEARS IN NUMBERS 📊</h2>
+  <p class="section-subtitle">The stats your body doesn't want you to see.</p>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="stat-number" data-target="290000000">0</span>
+      <span class="stat-label">👁️ Times You've Blinked</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number" data-target="43800">0</span>
+      <span class="stat-label">🍽️ Meals Eaten (none healthy enough)</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number" data-target="116800">0</span>
+      <span class="stat-label">😴 Hours Spent Sleeping (still not enough)</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number" data-target="840000000">0</span>
+      <span class="stat-label">❤️ Heartbeats So Far</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number" data-target="14600">0</span>
+      <span class="stat-label">☀️ Sunrises Missed (you were sleeping)</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number" data-target="0">0</span>
+      <span class="stat-label">🥁 Drum Solos Performed (LET'S FIX THIS)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BEFORE 40 vs AFTER 40 ===== -->
+<section class="forties-section">
+  <h2 class="section-title">⚡ BEFORE 40 vs AFTER 40 ⚡</h2>
+  <p class="section-subtitle">Same words. Very different meanings.</p>
+  <div class="comparison-table">
+    <div class="compare-row">
+      <div class="compare-before"><strong>"All-nighter"</strong><br>= Partying till dawn 🎉</div>
+      <div class="compare-vs">vs</div>
+      <div class="compare-after"><strong>"All-nighter"</strong><br>= Insomnia 😵</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-before"><strong>"Getting lit"</strong><br>= Party mode 🔥</div>
+      <div class="compare-vs">vs</div>
+      <div class="compare-after"><strong>"Getting lit"</strong><br>= Scented candles 🕯️</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-before"><strong>"Running"</strong><br>= Exercise 🏃</div>
+      <div class="compare-vs">vs</div>
+      <div class="compare-after"><strong>"Running"</strong><br>= Late for everything 😰</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-before"><strong>Hangovers</strong><br>last hours ⏰</div>
+      <div class="compare-vs">vs</div>
+      <div class="compare-after"><strong>Hangovers</strong><br>last entire weekends 📅</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-before"><strong>"Wild Friday"</strong><br>= Club at midnight 🕺</div>
+      <div class="compare-vs">vs</div>
+      <div class="compare-after"><strong>"Wild Friday"</strong><br>= Second dessert 🍰</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-before"><strong>"I'll sleep when I'm dead"</strong><br>= Life motto 😎</div>
+      <div class="compare-vs">vs</div>
+      <div class="compare-after"><strong>"I'll sleep when I'm dead"</strong><br>= Medical concern 🏥</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-before"><strong>"Shots! Shots! Shots!"</strong><br>= Tequila 🥃</div>
+      <div class="compare-vs">vs</div>
+      <div class="compare-after"><strong>"Shots! Shots! Shots!"</strong><br>= Flu vaccine 💉</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-before"><strong>"Netflix and chill"</strong><br>= You know... 😏</div>
+      <div class="compare-vs">vs</div>
+      <div class="compare-after"><strong>"Netflix and chill"</strong><br>= Actually watching Netflix. Then falling asleep. 😴</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STARTER PACK ===== -->
+<section class="forties-section">
+  <h2 class="section-title">🎒 THE OFFICIAL 40-YEAR-OLD STARTER PACK 🎒</h2>
+  <p class="section-subtitle">Congratulations. You've unlocked the full kit.</p>
+  <div class="starter-grid">
+    <div class="starter-item">
+      <span class="starter-emoji">👓</span>
+      <span>Reading Glasses</span>
+    </div>
+    <div class="starter-item">
+      <span class="starter-emoji">💊</span>
+      <span>Ibuprofen (daily)</span>
+    </div>
+    <div class="starter-item">
+      <span class="starter-emoji">🧦</span>
+      <span>Compression Socks</span>
+    </div>
+    <div class="starter-item">
+      <span class="starter-emoji">👴</span>
+      <span>"Back in my day..." stories</span>
+    </div>
+    <div class="starter-item">
+      <span class="starter-emoji">😴</span>
+      <span>Falling asleep on the couch at 9pm</span>
+    </div>
+    <div class="starter-item">
+      <span class="starter-emoji">🎵</span>
+      <span>Complaining about music today</span>
+    </div>
+    <div class="starter-item">
+      <span class="starter-emoji">🥱</span>
+      <span>Groaning when standing up</span>
+    </div>
+    <div class="starter-item">
+      <span class="starter-emoji">📺</span>
+      <span>Watching documentaries for fun</span>
+    </div>
+    <div class="starter-item">
+      <span class="starter-emoji">🛏️</span>
+      <span>Getting excited about a new mattress</span>
+    </div>
+    <div class="starter-item">
+      <span class="starter-emoji">🌡️</span>
+      <span>Talking about the weather. A lot.</span>
+    </div>
+    <div class="starter-item">
+      <span class="starter-emoji">🧘</span>
+      <span>Stretching before you stretch</span>
+    </div>
+    <div class="starter-item">
+      <span class="starter-emoji">🔇</span>
+      <span>"Can you turn that down?"</span>
+    </div>
+    <div class="starter-item">
+      <span class="starter-emoji">🩺</span>
+      <span>Random new aches every Monday</span>
+    </div>
+    <div class="starter-item">
+      <span class="starter-emoji">🧾</span>
+      <span>Getting excited about discounts</span>
+    </div>
+    <div class="starter-item highlight-item">
+      <span class="starter-emoji">🥁</span>
+      <span>DRUM LESSONS — the cure for ALL of this</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MOTIVATIONAL CLOSE ===== -->
+<section class="forties-section">
+  <div class="motivational-card">
+    <h2>🎸 But Seriously... 🎸</h2>
+    <p class="motivational-text">
+      40 isn't old. It's the <strong>remix</strong>. The director's cut. The acoustic version that hits even harder.
+    </p>
+    <p class="motivational-text">
+      You've spent 40 years figuring out who you are. Now it's time to be <strong>LOUD</strong> about it. 🔊
+    </p>
+    <p class="motivational-text">
+      Your midlife crisis could've been a sports car. You chose <strong>DRUMS</strong>. Absolute legend. 🤘
+    </p>
+    <p class="motivational-text highlight-text">
+      Life begins at 40 because NOW you've got drums. So go make some noise. 🥁
+    </p>
+    <a href="index.html" class="back-btn">
+      🥁 TAKE ME BACK TO REDEEM MY VOUCHER 🥁
+    </a>
+    <p class="back-hint">
+      (Your drum lesson voucher is waiting. Let's go make some noise.)
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  Produced by Bianca &amp; Bogdan 🎸🥁<br>
+  Mixing: Too Much Caffeine &nbsp;|&nbsp; Mastering: Pure Chaos<br>
+  <span class="footer-tour">40th Anniversary World Tour — No Refunds, No Returns to Your 30s</span><br><br>
+  A lot of pliculețe 🐱 for Pluto
+</footer>
+
+<script>
+  // ===== CONFETTI =====
+  const colors = ['#FF2D2D','#FFD600','#FF6B00','#00C853','#2196F3','#E91E63','#fff'];
+  const confettiContainer = document.getElementById('confetti');
+  for (let i = 0; i < 60; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.cssText = `
+      left: ${Math.random()*100}%;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+      width: ${6+Math.random()*10}px;
+      height: ${10+Math.random()*14}px;
+      animation-duration: ${3+Math.random()*5}s;
+      animation-delay: ${Math.random()*5}s;
+      border-radius: ${Math.random()>0.5?'50%':'3px'};
+    `;
+    confettiContainer.appendChild(el);
+  }
+
+  // ===== SCROLLING STRIP =====
+  const rockFacts = [
+    '🦴 YOUR KNEES NOW PREDICT THE WEATHER',
+    '👓 YOU NEED READING GLASSES TO READ THIS TICKER',
+    '😴 9PM IS THE NEW MIDNIGHT',
+    '🏥 THROWING YOUR BACK OUT IS NOW AN ACTUAL RISK',
+    '📼 YOU USED TO BE COOL. NOW YOU\'RE "VINTAGE"',
+    '🎮 40 = LEVEL 2 UNLOCKED. SAME GAME, WORSE GRAPHICS',
+    '🎸 YOUR FAVOURITE SONGS ARE NOW "CLASSIC ROCK"',
+    '📬 "GOING OUT" MEANS CHECKING THE MAILBOX',
+    '🍕 YOU CAN\'T EAT PIZZA AFTER 8PM ANYMORE',
+    '🚽 40: WHEN "ALL-NIGHTER" MEANS NOT GETTING UP TO PEE',
+    '🥁 BUT HEY, AT LEAST YOU\'VE GOT DRUMS NOW',
+    '🧓 WELCOME TO THE AGE OF "WHAT DID YOU SAY?"',
+  ];
+
+  const japanFacts = [
+    '⛩️ YOUR KNEES CREAK LOUDER THAN A TEMPLE BELL',
+    '👓 YOU NEED READING GLASSES FOR THE KANJI',
+    '🍵 9PM IS TEA TIME NOW, WARRIOR',
+    '🏔️ YOUR BACK GOES OUT MORE THAN YOU DO',
+    '🍶 YOU\'RE NOT OLD — YOU\'RE VINTAGE SAKE',
+    '🎮 40 = PRESTIGE MODE. SAME GAME, HARDER DIFFICULTY',
+    '🪘 YOUR FAVOURITE SONGS ARE NOW ENKA CLASSICS',
+    '🏠 "GOING OUT" MEANS CHECKING THE GENKAN',
+    '🍜 YOU CAN\'T EAT RAMEN AFTER 8PM ANYMORE',
+    '♨️ 40: WHEN ONSEN IS YOUR WILDEST NIGHT OUT',
+    '🪘 BUT HEY, AT LEAST YOU\'VE GOT TAIKO NOW',
+    '🗾 WELCOME TO THE AGE OF "HUH? NANI?"',
+  ];
+
+  let currentFacts = rockFacts;
+
+  function populateStrip() {
+    const strip = document.getElementById('strip');
+    strip.innerHTML = '';
+    [...currentFacts, ...currentFacts].forEach(f => {
+      const s = document.createElement('span');
+      s.textContent = f;
+      strip.appendChild(s);
+    });
+  }
+  populateStrip();
+
+  // ===== SAKURA =====
+  function createSakura() {
+    const container = document.getElementById('sakura');
+    if (container.children.length > 0) return;
+    const petals = ['🌸', '🩷', '✿', '❀', '🌸'];
+    for (let i = 0; i < 50; i++) {
+      const el = document.createElement('div');
+      el.classList.add('sakura');
+      el.textContent = petals[Math.floor(Math.random() * petals.length)];
+      el.style.left = Math.random() * 100 + '%';
+      el.style.fontSize = (12 + Math.random() * 16) + 'px';
+      el.style.animationDuration = (5 + Math.random() * 7) + 's';
+      el.style.animationDelay = (Math.random() * 8) + 's';
+      el.style.opacity = 0.4 + Math.random() * 0.5;
+      container.appendChild(el);
+    }
+  }
+
+  // ===== THEME TOGGLE =====
+  let isJapanTheme = false;
+
+  const originalContent = {
+    banner: '⚰️ WELCOME TO YOUR FORTIES ⚰️',
+    title: 'THE <span>FOURTH</span><br>DECADE!',
+    subtitle: '40 years of practice runs. NOW the show begins.',
+    altText: 'Old enough to know better. Young enough to drum louder.',
+  };
+
+  const japanContent = {
+    banner: '⚰️ 四十歳へようこそ! ⚰️',
+    title: 'THE <span>四十</span><br>DECADE!',
+    subtitle: 'From the peaks of the mountain, the taiko echoes your 40 years.',
+    altText: 'Wise enough for tea. Wild enough for taiko.',
+  };
+
+  function toggleTheme() {
+    isJapanTheme = !isJapanTheme;
+    const body = document.body;
+    const content = isJapanTheme ? japanContent : originalContent;
+    const toggleIcon = document.querySelector('.toggle-icon');
+
+    body.classList.toggle('japan-theme', isJapanTheme);
+    toggleIcon.textContent = isJapanTheme ? '🥁' : '⛩️';
+    document.getElementById('theme-toggle').title = isJapanTheme ? 'Switch to Rock theme' : 'Switch to Japanese theme';
+
+    if (isJapanTheme) createSakura();
+
+    // Swap content
+    document.getElementById('banner').innerHTML = content.banner;
+    document.getElementById('hero-title').innerHTML = content.title;
+    document.getElementById('hero-subtitle').textContent = content.subtitle;
+    document.getElementById('hero-alt').textContent = content.altText;
+
+    // Swap ticker
+    currentFacts = isJapanTheme ? japanFacts : rockFacts;
+    populateStrip();
+
+    // Persist theme choice
+    try { localStorage.setItem('drumTheme', isJapanTheme ? 'japan' : 'rock'); } catch(e) {}
+  }
+
+  // Check stored theme
+  try {
+    if (localStorage.getItem('drumTheme') === 'japan') toggleTheme();
+  } catch(e) {}
+
+  // ===== ANIMATED COUNTERS =====
+  function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target);
+          if (target === 0) {
+            el.textContent = '0';
+            observer.unobserve(el);
+            return;
+          }
+          const duration = 2000;
+          const start = performance.now();
+          function update(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(target * eased).toLocaleString();
+            if (progress < 1) requestAnimationFrame(update);
+          }
+          requestAnimationFrame(update);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.3 });
+    counters.forEach(c => observer.observe(c));
+  }
+  animateCounters();
+
+  // ===== SCROLL REVEAL =====
+  function setupScrollReveal() {
+    const sections = document.querySelectorAll('.forties-section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(s => {
+      s.style.opacity = '0';
+      s.style.transform = 'translateY(30px)';
+      s.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(s);
+    });
+  }
+  setupScrollReveal();
+</script>
+</body>
+</html>
